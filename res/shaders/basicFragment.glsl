@@ -15,3 +15,4 @@ void main() {
 	else
 		fragColor = textureColor * vec4(color, 1);
 }
+

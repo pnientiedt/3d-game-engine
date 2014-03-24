@@ -3,7 +3,7 @@ package com.base.engine;
 public class Game {
 
 	private Mesh mesh;
-	private BasicShader shader;
+	private Shader shader;
 	private Material material;
 	private Transform transform;
 	private Camera camera;
@@ -13,8 +13,9 @@ public class Game {
 		// mesh = ResourceLoader.loadMesh("charobj.obj");
 		mesh = new Mesh();
 		material = new Material(ResourceLoader.loadTexture("test.png"), new Vector3f(0, 1, 1));
-		shader = BasicShader.getInstance();
+		shader = PhongShader.getInstance();
 		camera = new Camera();
+		transform = new Transform();
 
 		Vertex[] vertices = new Vertex[] { new Vertex(new Vector3f(-1, -1, 0), new Vector2f(0, 0)),
 				new Vertex(new Vector3f(0, 1, 0), new Vector2f(0.5f, 0)), new Vertex(new Vector3f(1, -1, 0), new Vector2f(1.0f, 0)),
@@ -26,8 +27,8 @@ public class Game {
 
 		Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
 		Transform.setCamera(camera);
-		transform = new Transform();
-
+		
+		PhongShader.setAmgientLight(new Vector3f(0.1f, 0.1f, 0.1f));
 	}
 
 	public void input() {
