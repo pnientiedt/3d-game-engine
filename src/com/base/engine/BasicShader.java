@@ -17,7 +17,9 @@ public class BasicShader extends Shader {
 
 	public static BasicShader getInstance() {
 		if (instance == null) {
-			instance = new BasicShader();
+			synchronized (BasicShader.class) {
+				instance = new BasicShader();
+			}
 		}
 		return instance;
 	}
@@ -28,7 +30,7 @@ public class BasicShader extends Shader {
 			material.getTexture().bind();
 		else
 			RenderUtil.unbindTextures();
-		
+
 		setUniform("transform", projectedMatrix);
 		setUniform("color", material.getColor());
 	}

@@ -26,7 +26,9 @@ public class PhongShader extends Shader {
 
 	public static PhongShader getInstance() {
 		if (instance == null) {
-			instance = new PhongShader();
+			synchronized (BasicShader.class) {
+				instance = new PhongShader();
+			}
 		}
 		return instance;
 	}
