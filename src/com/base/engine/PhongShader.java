@@ -2,8 +2,8 @@ package com.base.engine;
 
 public class PhongShader extends Shader {
 	
-	private static final int MAX_POINT_LIGHTS = 4;
-	private static final int MAX_SPOT_LIGHTS = 4;
+	private final static int MAX_POINT_LIGHTS = 4;
+	private final static int MAX_SPOT_LIGHTS = 4;
 	
 	private static PhongShader instance;
 	
