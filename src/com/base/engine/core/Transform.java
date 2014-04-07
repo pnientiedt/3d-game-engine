@@ -1,4 +1,6 @@
-package com.base.engine;
+package com.base.engine.core;
+
+import com.base.engine.rendering.Camera;
 
 //TODO: make the seters to change the values and not create a new object, or delete constructor, to prevent to much garbage collection
 public class Transform {

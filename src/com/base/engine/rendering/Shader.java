@@ -1,4 +1,4 @@
-package com.base.engine;
+package com.base.engine.rendering;
 
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.*;
@@ -6,6 +6,10 @@ import static org.lwjgl.opengl.GL32.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
+
+import com.base.engine.core.Matrix4f;
+import com.base.engine.core.Util;
+import com.base.engine.core.Vector3f;
 
 public class Shader {
 	private int program;

@@ -1,6 +1,25 @@
-package com.base.engine;
-public class Game 
-{
+package com.base.game;
+
+import com.base.engine.core.Time;
+import com.base.engine.core.Transform;
+import com.base.engine.core.Vector2f;
+import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.Attenuation;
+import com.base.engine.rendering.BaseLight;
+import com.base.engine.rendering.Camera;
+import com.base.engine.rendering.DirectionalLight;
+import com.base.engine.rendering.Material;
+import com.base.engine.rendering.Mesh;
+import com.base.engine.rendering.PhongShader;
+import com.base.engine.rendering.PointLight;
+import com.base.engine.rendering.RenderUtil;
+import com.base.engine.rendering.Shader;
+import com.base.engine.rendering.SpotLight;
+import com.base.engine.rendering.Texture;
+import com.base.engine.rendering.Vertex;
+import com.base.engine.rendering.Window;
+
+public class TestGame implements Game {
 	private Mesh mesh;
 	private Shader shader;
 	private Material material;
@@ -13,7 +32,11 @@ public class Game
 	SpotLight sLight1 = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1f,1f), 0.8f), new Attenuation(0,0,0.1f), new Vector3f(-2,0,5f), 30),
 									  new Vector3f(1,1,1), 0.7f);
 	
-	public Game()
+	public TestGame() {
+		
+	}
+	
+	public void init()
 	{
 		material = new Material(new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
 		shader = PhongShader.getInstance();
