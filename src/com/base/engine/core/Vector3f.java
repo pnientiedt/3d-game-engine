@@ -87,6 +87,7 @@ public class Vector3f {
 		return new Vector3f(x / r, y / r, z / r);
 	}
 
+	@Override
 	public String toString() {
 		return "(" + x + " " + y + " " + z + ")";
 	}
