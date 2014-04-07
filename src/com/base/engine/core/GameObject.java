@@ -2,6 +2,8 @@ package com.base.engine.core;
 
 import java.util.ArrayList;
 
+import com.base.engine.rendering.Shader;
+
 public class GameObject {
 	private ArrayList<GameObject> children;
 	private ArrayList<GameComponent> components;
@@ -41,11 +43,11 @@ public class GameObject {
 			child.update();
 	}
 	
-	public void render() {
+	public void render(Shader shader) {
 		for (GameComponent component : components) {
-			component.render(transform);
+			component.render(transform, shader);
 		}
 		for (GameObject child: children)
-			child.render();
+			child.render(shader);
 	}
 }

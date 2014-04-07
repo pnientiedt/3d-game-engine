@@ -28,10 +28,7 @@ public class BasicShader extends Shader {
 
 	@Override
 	public void updateUniforms(Matrix4f worldMatrix, Matrix4f projectedMatrix, Material material) {
-		if (material.getTexture() != null)
-			material.getTexture().bind();
-		else
-			RenderUtil.unbindTextures();
+		material.getTexture().bind();
 
 		setUniform("transform", projectedMatrix);
 		setUniform("color", material.getColor());

@@ -12,10 +12,8 @@ import com.base.engine.rendering.Texture;
 import com.base.engine.rendering.Vertex;
 import com.base.engine.rendering.Window;
 
-public class TestGame implements Game {
+public class TestGame extends Game {
 	private Camera camera;
-	
-	private GameObject root;
 
 	public TestGame() {
 		
@@ -24,7 +22,6 @@ public class TestGame implements Game {
 	@Override
 	public void init()
 	{
-		root = new GameObject();
 		camera = new Camera();
 		
 		float fieldDepth = 10.0f;
@@ -42,31 +39,34 @@ public class TestGame implements Game {
 		Material material = new Material(new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
 		
 		MeshRenderer meshRenderer = new MeshRenderer(mesh, material);
-		root.addComponent(meshRenderer);
+		
+		GameObject planeObject = new GameObject();
+		planeObject.addComponent(meshRenderer);
+		planeObject.getTransform().setTranslation(0, -1, 5);
+		
+		getRootObject().addChild(planeObject);
 		
 		Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
 		Transform.setCamera(camera);
 	}
 	
-	@Override
-	public void input()
-	{
-		camera.input();
-		root.input();
-	}
-	
-	float temp = 0.0f;
-	
-	@Override
-	public void update()
-	{
-		root.getTransform().setTranslation(0, -1, 5);
-		root.update();
-	}
-	
-	@Override
-	public void render()
-	{
-		root.render();
-	}
+//	@Override
+//	public void input()
+//	{
+//		camera.input();
+//		root.input();
+//	}
+//	
+//	@Override
+//	public void update()
+//	{
+//		root.getTransform().setTranslation(0, -1, 5);
+//		root.update();
+//	}
+//	
+//	@Override
+//	public void render()
+//	{
+//		root.render();
+//	}
 }

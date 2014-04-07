@@ -71,10 +71,7 @@ public class PhongShader extends Shader {
 
 	@Override
 	public void updateUniforms(Matrix4f worldMatrix, Matrix4f projectedMatrix, Material material) {
-		if (material.getTexture() != null)
-			material.getTexture().bind();
-		else
-			RenderUtil.unbindTextures();
+		material.getTexture().bind();
 		
 		setUniform("transformProjected", projectedMatrix);
 		setUniform("transform", worldMatrix);
