@@ -10,7 +10,6 @@ import com.base.engine.rendering.Texture;
 import com.base.engine.rendering.Vertex;
 
 public class TestGame extends Game {
-//	private Camera camera;
 
 	public TestGame() {
 		
@@ -19,7 +18,6 @@ public class TestGame extends Game {
 	@Override
 	public void init()
 	{
-//		camera = new Camera();
 		
 		float fieldDepth = 10.0f;
 		float fieldWidth = 10.0f;
@@ -39,31 +37,8 @@ public class TestGame extends Game {
 		
 		GameObject planeObject = new GameObject();
 		planeObject.addComponent(meshRenderer);
-		planeObject.getTransform().setTranslation(0, -1, 5);
+		planeObject.getTransform().setPos(0, -1, 5);
 		
 		getRootObject().addChild(planeObject);
-		
-//		Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
-//		Transform.setCamera(camera);
 	}
-	
-//	@Override
-//	public void input()
-//	{
-//		camera.input();
-//		root.input();
-//	}
-//	
-//	@Override
-//	public void update()
-//	{
-//		root.getTransform().setTranslation(0, -1, 5);
-//		root.update();
-//	}
-//	
-//	@Override
-//	public void render()
-//	{
-//		root.render();
-//	}
 }

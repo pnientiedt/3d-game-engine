@@ -42,21 +42,21 @@ public class CoreEngine {
 		isRunning = true;
 
 		int frames = 0;
-		long frameCounter = 0;
+		double frameCounter = 0;
 		
 		game.init();
 
-		long lastTime = Time.getTime();
+		double lastTime = Time.getTime();
 		double unprocessedTime = 0;
 
 		while (isRunning) {
 			boolean render = false;
 
-			long startTime = Time.getTime();
-			long passedTime = startTime - lastTime;
+			double startTime = Time.getTime();
+			double passedTime = startTime - lastTime;
 			lastTime = startTime;
 
-			unprocessedTime += passedTime / (double) Time.SECOND;
+			unprocessedTime += passedTime;
 			frameCounter += passedTime;
 
 			while (unprocessedTime > frameTime) {
@@ -66,15 +66,13 @@ public class CoreEngine {
 				if (Window.isCloseRequested())
 					stop();
 
-				Time.setDelta(frameTime);
-
-				game.input();
-				renderingEngine.input();
+				game.input((float)frameTime);
+				renderingEngine.input((float)frameTime);
 				Input.update();
 
-				game.update();
+				game.update((float)frameTime);
 
-				if (frameCounter >= Time.SECOND) {
+				if (frameCounter >= 1) {
 					System.out.println(frames);
 					frames = 0;
 					frameCounter = 0;
