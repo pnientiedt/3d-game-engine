@@ -8,10 +8,13 @@ import java.io.FileReader;
 import java.util.HashMap;
 
 import com.base.engine.core.Matrix4f;
+import com.base.engine.core.RenderingEngine;
+import com.base.engine.core.Transform;
 import com.base.engine.core.Util;
 import com.base.engine.core.Vector3f;
 
 public class Shader {
+	private RenderingEngine renderingEngine;
 	private int program;
 	private HashMap<String, Integer> uniforms;
 	
@@ -29,7 +32,7 @@ public class Shader {
 		glUseProgram(program);
 	}
 	
-	public void updateUniforms(Matrix4f worldMatrix, Matrix4f projectedMatrix, Material material) {
+	public void updateUniforms(Transform transform, Material material) {
 		
 	}
 	
@@ -138,5 +141,13 @@ public class Shader {
 		}
 
 		return shaderSource.toString();
+	}
+	
+	public void setRenderingEngine(RenderingEngine renderingEngine) {
+		this.renderingEngine = renderingEngine;
+	}
+	
+	public RenderingEngine getRenderingEngine() {
+		return renderingEngine;
 	}
 }
