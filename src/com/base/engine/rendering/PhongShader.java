@@ -75,8 +75,8 @@ public class PhongShader extends Shader {
 		Matrix4f projectedMatrix = getRenderingEngine().getMainCamera().getViewProjection().mul(worldMatrix);
 		material.getTexture().bind();
 		
-		setUniform("transformProjected", projectedMatrix);
 		setUniform("transform", worldMatrix);
+		setUniform("transformProjected", projectedMatrix);
 		setUniform("baseColor", material.getColor());
 		
 		setUniform("ambientLight", ambientLight);
