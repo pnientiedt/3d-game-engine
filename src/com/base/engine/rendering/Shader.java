@@ -72,6 +72,10 @@ public class Shader {
 		addProgramm(text, GL_FRAGMENT_SHADER);
 	}
 	
+	public void setAttribLocation(String attributeName, int location) {
+		glBindAttribLocation(program, location, attributeName);
+	}
+	
 	public void compileShader() {
 		glLinkProgram(program);
 		

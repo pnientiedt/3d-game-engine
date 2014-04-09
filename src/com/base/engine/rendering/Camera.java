@@ -2,7 +2,6 @@ package com.base.engine.rendering;
 
 import com.base.engine.core.Input;
 import com.base.engine.core.Matrix4f;
-import com.base.engine.core.Time;
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
 
@@ -32,7 +31,7 @@ public class Camera {
 
 	public void input(float delta) {
 		float sensitivity = 0.5f;
-		float movAmt = (float) (10 * delta);
+		float movAmt = 10 * delta;
 		// float rotAmt = (float)(100 * Time.getDelta());
 
 		if (Input.getKey(Input.KEY_ESCAPE)) {
