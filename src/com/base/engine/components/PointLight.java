@@ -1,42 +1,24 @@
 package com.base.engine.components;
 
-import com.base.engine.core.RenderingEngine;
 import com.base.engine.core.Vector3f;
-import com.base.engine.rendering.Attenuation;
-import com.base.engine.rendering.BaseLight;
+import com.base.engine.rendering.ForwardPoint;
 
-public class PointLight extends GameComponent{
-	private BaseLight baseLight;
-	private Attenuation atten;
+public class PointLight extends BaseLight{
 	private Vector3f position;
+	private float constant;
+	private float linear;
+	private float exponent;
 	private float range;
 
-	public PointLight(BaseLight baseLight, Attenuation atten, Vector3f position, float range) {
-		this.baseLight = baseLight;
-		this.atten = atten;
+	public PointLight(Vector3f color, float intensity, float constant, float linear, float exponent, Vector3f position, float range) {
+		super(color, intensity);
+		this.constant = constant;
+		this.linear = linear;
+		this.exponent = exponent;
 		this.position = position;
 		this.setRange(range);
-	}
-	
-	@Override
-	public void addToRenderingEngine(RenderingEngine renderingEngine) {
-		renderingEngine.addPointLight(this);
-	}
-
-	public BaseLight getBaseLight() {
-		return baseLight;
-	}
-
-	public void setBaseLight(BaseLight baseLight) {
-		this.baseLight = baseLight;
-	}
-
-	public Attenuation getAtten() {
-		return atten;
-	}
-
-	public void setAtten(Attenuation atten) {
-		this.atten = atten;
+		
+		setShader(ForwardPoint.getInstance());
 	}
 
 	public Vector3f getPosition() {
@@ -45,6 +27,30 @@ public class PointLight extends GameComponent{
 
 	public void setPosition(Vector3f position) {
 		this.position = position;
+	}
+
+	public float getConstant() {
+		return constant;
+	}
+
+	public void setConstant(float constant) {
+		this.constant = constant;
+	}
+
+	public float getLinear() {
+		return linear;
+	}
+
+	public void setLinear(float linear) {
+		this.linear = linear;
+	}
+
+	public float getExponent() {
+		return exponent;
+	}
+
+	public void setExponent(float exponent) {
+		this.exponent = exponent;
 	}
 
 	public float getRange() {
