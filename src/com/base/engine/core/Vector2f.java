@@ -12,6 +12,10 @@ public class Vector2f {
 	public float length() {
 		return (float) Math.sqrt(x * x + y * y);
 	}
+	
+	public float max() {
+		return Math.max(x, y);
+	}
 
 	public float dot(Vector2f r) {
 		return x * r.getX() + y * r.getY();
