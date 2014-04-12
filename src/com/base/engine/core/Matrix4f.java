@@ -89,14 +89,19 @@ public class Matrix4f {
 	}
 	
 	public Matrix4f initRotation(Vector3f forward, Vector3f up) {
-		Vector3f f = forward;
-		f = f.normalized();
+		Vector3f f = forward.normalized();		
+		Vector3f r = up.normalized();
 		
-		Vector3f r = up;
-		r = r.normalized();
 		r = r.cross(f);
-		
 		Vector3f u = f.cross(r);
+		
+		return initRotation(f, u, r);
+	}
+	
+	public Matrix4f initRotation(Vector3f forward, Vector3f up, Vector3f right) {
+		Vector3f f = forward;		
+		Vector3f r = right;
+		Vector3f u = up;
 		
 		m[0][0] = r.getX(); m[0][1] = r.getY(); m[0][2] = r.getZ(); m[0][3] = 0;
 		m[1][0] = u.getX();	m[1][1] = u.getY();	m[1][2] = u.getZ();	m[1][3] = 0;

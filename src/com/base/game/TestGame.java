@@ -6,6 +6,7 @@ import com.base.engine.components.PointLight;
 import com.base.engine.components.SpotLight;
 import com.base.engine.core.Game;
 import com.base.engine.core.GameObject;
+import com.base.engine.core.Quaternion;
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.Material;
@@ -41,7 +42,7 @@ public class TestGame extends Game {
 		
 		GameObject planeObject = new GameObject();
 		planeObject.addComponent(meshRenderer);
-		planeObject.getTransform().setPos(0, -1, 5);
+		planeObject.getTransform().getPos().set(0, -1, 5);
 		
 		GameObject directionalLightObject = new GameObject();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0,0,1), 0.4f, new Vector3f(1,1,1));;
@@ -52,11 +53,11 @@ public class TestGame extends Game {
 		
 		GameObject spotLightObject = new GameObject();
 		SpotLight spotLight = new SpotLight(new Vector3f(0,1,1), 0.4f
-				, new Vector3f(0,0,0.1f), 
-				new Vector3f(1,0,0), 0.7f);
+				, new Vector3f(0,0,0.1f), 0.7f);
 				spotLightObject.addComponent(spotLight);
 				
-		spotLight.getTransform().setPos(5,0,5);
+		spotLight.getTransform().getPos().set(5,0,5);
+		spotLight.getTransform().setRot(new Quaternion().initRotation(new Vector3f(0,1,0), (float) Math.toRadians(-90)));
 		
 		getRootObject().addChild(planeObject);
 		getRootObject().addChild(directionalLightObject);
