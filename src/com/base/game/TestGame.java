@@ -1,5 +1,6 @@
 package com.base.game;
 
+import com.base.engine.components.Camera;
 import com.base.engine.components.DirectionalLight;
 import com.base.engine.components.MeshRenderer;
 import com.base.engine.components.PointLight;
@@ -13,6 +14,7 @@ import com.base.engine.rendering.Material;
 import com.base.engine.rendering.Mesh;
 import com.base.engine.rendering.Texture;
 import com.base.engine.rendering.Vertex;
+import com.base.engine.rendering.Window;
 
 public class TestGame extends Game {
 
@@ -63,5 +65,7 @@ public class TestGame extends Game {
 		getRootObject().addChild(directionalLightObject);
 		getRootObject().addChild(pointLightObject);
 		getRootObject().addChild(spotLightObject);
+		
+		getRootObject().addChild(new GameObject().addComponent(new Camera((float)Math.toRadians(70f), (float)Window.getWidth()/(float)Window.getHeight(), 0.1f, 1000)));
 	}
 }

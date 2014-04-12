@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 import java.util.ArrayList;
 
 import com.base.engine.components.BaseLight;
+import com.base.engine.components.Camera;
 import com.base.engine.core.GameObject;
 import com.base.engine.core.Vector3f;
 
@@ -32,7 +33,7 @@ public class RenderingEngine {
 		
 		glEnable(GL_TEXTURE_2D);
 		
-		mainCamera = new Camera((float)Math.toRadians(70f), (float)Window.getWidth()/(float)Window.getHeight(), 0.1f, 1000);
+//		mainCamera = new Camera((float)Math.toRadians(70f), (float)Window.getWidth()/(float)Window.getHeight(), 0.1f, 1000);
 	
 		ambientLight = new Vector3f(0.1f, 0.1f, 0.1f);
 //		activeDirectionalLight = new DirectionalLight(new BaseLight(new Vector3f(0,0,1), 0.4f), new Vector3f(1,1,1));
@@ -62,10 +63,6 @@ public class RenderingEngine {
 	
 	public Vector3f getAmbientLight() {
 		return ambientLight;
-	}
-	
-	public void input(float delta) {
-		mainCamera.input(delta);
 	}
 	
 	public void render(GameObject object) {
@@ -129,6 +126,10 @@ public class RenderingEngine {
 	
 	public BaseLight getActiveLight() {
 		return activeLight;
+	}
+	
+	public void addCamera(Camera camera) {
+		mainCamera = camera;
 	}
 
 	public Camera getMainCamera() {
