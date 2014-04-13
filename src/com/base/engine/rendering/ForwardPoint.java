@@ -57,7 +57,7 @@ public class ForwardPoint extends Shader {
 		setUniform("specularIntensity", material.getSpecularIntensity());
 		setUniform("specularPower", material.getSpecularpower());
 
-		setUniform("eyePos", getRenderingEngine().getMainCamera().getTransform().getPos());
+		setUniform("eyePos", getRenderingEngine().getMainCamera().getTransform().getTransformedPos());
 
 		setUniformPointLight("pointLight", (PointLight) getRenderingEngine().getActiveLight());
 	}
@@ -72,7 +72,7 @@ public class ForwardPoint extends Shader {
 		setUniform(uniformName + ".atten.constant", pointLight.getConstant());
 		setUniform(uniformName + ".atten.linear", pointLight.getLinear());
 		setUniform(uniformName + ".atten.exponent", pointLight.getExponent());
-		setUniform(uniformName + ".position", pointLight.getTransform().getPos());
+		setUniform(uniformName + ".position", pointLight.getTransform().getTransformedPos());
 		setUniform(uniformName + ".range", pointLight.getRange());
 	}
 }
