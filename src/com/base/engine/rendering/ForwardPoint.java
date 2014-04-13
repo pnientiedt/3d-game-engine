@@ -46,20 +46,20 @@ public class ForwardPoint extends Shader {
 	}
 
 	@Override
-	public void updateUniforms(Transform transform, Material material) {
+	public void updateUniforms(Transform transform, Material material, RenderingEngine renderingEngine) {
 		Matrix4f worldMatrix = transform.getTransformation();
-		Matrix4f projectedMatrix = getRenderingEngine().getMainCamera().getViewProjection().mul(worldMatrix);
-		material.getTexture().bind();
+		Matrix4f projectedMatrix = renderingEngine.getMainCamera().getViewProjection().mul(worldMatrix);
+		material.getTexture("diffuse").bind();
 
 		setUniform("model", worldMatrix);
 		setUniform("MVP", projectedMatrix);
 
-		setUniform("specularIntensity", material.getSpecularIntensity());
-		setUniform("specularPower", material.getSpecularpower());
+		setUniform("specularIntensity", material.getFloat("specularIntensity"));
+		setUniform("specularPower", material.getFloat("specularPower"));
 
-		setUniform("eyePos", getRenderingEngine().getMainCamera().getTransform().getTransformedPos());
+		setUniform("eyePos", renderingEngine.getMainCamera().getTransform().getTransformedPos());
 
-		setUniformPointLight("pointLight", (PointLight) getRenderingEngine().getActiveLight());
+		setUniformPointLight("pointLight", (PointLight) renderingEngine.getActiveLight());
 	}
 
 	public void setUniformBaseLight(String uniformName, BaseLight baseLight) {

@@ -72,9 +72,8 @@ public class RenderingEngine {
 		object.addToRenderingEngine(this);
 		
 		Shader forwardAmbient = ForwardAmbient.getInstance();
-		forwardAmbient.setRenderingEngine(this);
 		
-		object.render(forwardAmbient);
+		object.render(forwardAmbient, this);
 		
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
@@ -82,9 +81,8 @@ public class RenderingEngine {
 		glDepthFunc(GL_EQUAL);
 		
 		for(BaseLight light: lights) {
-			light.getShader().setRenderingEngine(this);
 			activeLight = light;
-			object.render(light.getShader());
+			object.render(light.getShader(), this);
 		}
 		
 		glDepthFunc(GL_LESS);		
