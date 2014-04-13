@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.base.engine.core.Util;
 import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.meshLoading.OBJModel;
 
 public class Mesh {
 
@@ -109,6 +110,8 @@ public class Mesh {
 			new Exception().printStackTrace();
 			System.exit(1);
 		}
+		
+		OBJModel test = new OBJModel("./res/models/" + fileName);
 
 		ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 		ArrayList<Integer> indices = new ArrayList<Integer>();

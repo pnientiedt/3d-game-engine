@@ -79,6 +79,7 @@ public class Vector2f {
 		return new Vector2f(Math.abs(x), Math.abs(y));
 	}
 
+	@Override
 	public String toString() {
 		return "(" + x + " " + y + ")";
 	}

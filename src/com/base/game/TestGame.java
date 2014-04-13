@@ -6,6 +6,7 @@ import com.base.engine.rendering.*;
 
 public class TestGame extends Game
 {
+	@Override
 	public void init()
 	{
 		float fieldDepth = 10.0f;
@@ -34,6 +35,8 @@ public class TestGame extends Game
 		material.addTexture("diffuse", new Texture("test.png"));
 		material.addFloat("specularIntensity", 1f);
 		material.addFloat("specularPower", 8f);
+		
+		Mesh tempMesh = new Mesh("monkey3.obj");
 				
 		MeshRenderer meshRenderer = new MeshRenderer(mesh, material);
 
