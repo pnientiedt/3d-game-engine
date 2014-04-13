@@ -81,6 +81,17 @@ public class Vector2f {
 	public String toString() {
 		return "(" + x + " " + y + ")";
 	}
+	
+	public Vector2f set(float x, float y) {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
+	
+	public Vector2f set(Vector2f r) {
+		set(r.getX(), r.getY());
+		return this;
+	}
 
 	public float getX() {
 		return x;
