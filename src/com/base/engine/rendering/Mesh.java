@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.base.engine.core.Util;
 import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.meshLoading.IndexedModel;
 import com.base.engine.rendering.meshLoading.OBJModel;
 
 public class Mesh {
@@ -112,50 +113,64 @@ public class Mesh {
 		}
 		
 		OBJModel test = new OBJModel("./res/models/" + fileName);
-
+		IndexedModel model = test.toIndexedModel();
+		model.calcNormals();
+		
 		ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-		ArrayList<Integer> indices = new ArrayList<Integer>();
-
-		BufferedReader meshReader = null;
-
-		try {
-			meshReader = new BufferedReader(new FileReader("./res/models/"
-					+ fileName));
-			String line;
-			while ((line = meshReader.readLine()) != null) {
-				String[] tokens = line.split(" ");
-				tokens = Util.removeEmptyString(tokens);
-
-				if (tokens.length == 0 || tokens[0].startsWith("#")) {
-					continue;
-				} else if (tokens[0].equals("v")) {
-					vertices.add(new Vertex(new Vector3f(Float
-							.valueOf(tokens[1]), Float.valueOf(tokens[2]),
-							Float.valueOf(tokens[3]))));
-				} else if (tokens[0].equals("f")) {
-					indices.add(Integer.parseInt(tokens[1].split("/")[0]) - 1);
-					indices.add(Integer.parseInt(tokens[2].split("/")[0]) - 1);
-					indices.add(Integer.parseInt(tokens[3].split("/")[0]) - 1);
-
-					if (tokens.length > 4) {
-						indices.add(Integer.parseInt(tokens[1].split("/")[0]) - 1);
-						indices.add(Integer.parseInt(tokens[3].split("/")[0]) - 1);
-						indices.add(Integer.parseInt(tokens[4].split("/")[0]) - 1);
-					}
-				}
-			}
-
-			meshReader.close();
-
-			Vertex[] vertexData = vertices.toArray(new Vertex[vertices.size()]);
-
-			Integer[] indexData = indices.toArray(new Integer[indices.size()]);
-
-			addVertices(vertexData, Util.toIntArray(indexData), true);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
+		
+		for(int i = 0; i < model.getPositions().size(); i++) {
+			vertices.add(new Vertex(model.getPositions().get(i), model.getTexCoords().get(i), model.getNormals().get(i)));
 		}
+		
+		Vertex[] vertexData = vertices.toArray(new Vertex[vertices.size()]);
+
+		Integer[] indexData = model.getIndices().toArray(new Integer[model.getIndices().size()]);
+
+		addVertices(vertexData, Util.toIntArray(indexData), false);
+
+//		ArrayList<Vertex> vertices = new ArrayList<Vertex>();
+//		ArrayList<Integer> indices = new ArrayList<Integer>();
+//
+//		BufferedReader meshReader = null;
+//
+//		try {
+//			meshReader = new BufferedReader(new FileReader("./res/models/"
+//					+ fileName));
+//			String line;
+//			while ((line = meshReader.readLine()) != null) {
+//				String[] tokens = line.split(" ");
+//				tokens = Util.removeEmptyString(tokens);
+//
+//				if (tokens.length == 0 || tokens[0].startsWith("#")) {
+//					continue;
+//				} else if (tokens[0].equals("v")) {
+//					vertices.add(new Vertex(new Vector3f(Float
+//							.valueOf(tokens[1]), Float.valueOf(tokens[2]),
+//							Float.valueOf(tokens[3]))));
+//				} else if (tokens[0].equals("f")) {
+//					indices.add(Integer.parseInt(tokens[1].split("/")[0]) - 1);
+//					indices.add(Integer.parseInt(tokens[2].split("/")[0]) - 1);
+//					indices.add(Integer.parseInt(tokens[3].split("/")[0]) - 1);
+//
+//					if (tokens.length > 4) {
+//						indices.add(Integer.parseInt(tokens[1].split("/")[0]) - 1);
+//						indices.add(Integer.parseInt(tokens[3].split("/")[0]) - 1);
+//						indices.add(Integer.parseInt(tokens[4].split("/")[0]) - 1);
+//					}
+//				}
+//			}
+//
+//			meshReader.close();
+//
+//			Vertex[] vertexData = vertices.toArray(new Vertex[vertices.size()]);
+//
+//			Integer[] indexData = indices.toArray(new Integer[indices.size()]);
+//
+//			addVertices(vertexData, Util.toIntArray(indexData), true);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.exit(1);
+//		}
 	}
 }
