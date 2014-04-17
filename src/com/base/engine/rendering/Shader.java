@@ -34,6 +34,40 @@ public class Shader {
 		
 	}
 	
+	public void addAllAttributes(String shaderText) {
+		final String ATTRIBUTE_KEYWORD = "attribute";
+		int attributeStartLocation = shaderText.indexOf(ATTRIBUTE_KEYWORD);
+		int attribNumber = 0;
+		while(attributeStartLocation != -1) {
+			int begin = attributeStartLocation + ATTRIBUTE_KEYWORD.length() + 1;
+			int end = shaderText.indexOf(";", begin);
+			
+			String attributeLine = shaderText.substring(begin, end);
+			String attributeName = attributeLine.substring(attributeLine.indexOf(" ") + 1, attributeLine.length());
+			
+			setAttribLocation(attributeName, attribNumber);
+			attribNumber++;
+			
+			attributeStartLocation = shaderText.indexOf(ATTRIBUTE_KEYWORD, attributeStartLocation + ATTRIBUTE_KEYWORD.length());
+		}
+	}
+	
+	public void addAllUniforms(String shaderText) {
+		final String UNIFORM_KEYWORD = "uniform";
+		int uniformStartLocation = shaderText.indexOf(UNIFORM_KEYWORD);
+		while(uniformStartLocation != -1) {
+			int begin = uniformStartLocation + UNIFORM_KEYWORD.length() + 1;
+			int end = shaderText.indexOf(";", begin);
+			
+			String uniformLine = shaderText.substring(begin, end);
+			String uniformName = uniformLine.substring(uniformLine.indexOf(" ") + 1, uniformLine.length());
+			
+			addUniform(uniformName);
+			
+			uniformStartLocation = shaderText.indexOf(UNIFORM_KEYWORD, uniformStartLocation + UNIFORM_KEYWORD.length());
+		}
+	}
+	
 	public void addUniform(String uniform) {
 		int uniformLocation = glGetUniformLocation(program, uniform);
 		
@@ -125,7 +159,7 @@ public class Shader {
 		glUniformMatrix4(uniforms.get(uniformName), true, Util.createFlippedBuffer(value)); //true = row mature order
 	}
 	
-	private String loadShader(String fileName) {
+	protected String loadShader(String fileName) {
 		StringBuilder shaderSource = new StringBuilder();
 		BufferedReader shaderReader = null;
 		final String INCLUDE_DIRECTIVE = "#include";
