@@ -20,6 +20,7 @@ public class TextureResource {
 		return refCount == 0;
 	}
 
+	@Override
 	protected void finalize() {
 		glDeleteBuffers(id);
 	}

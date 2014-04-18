@@ -24,6 +24,7 @@ public class MeshResource {
 		return refCount == 0;
 	}
 	
+	@Override
 	protected void finalize() {
 		glDeleteBuffers(vbo);
 		glDeleteBuffers(ibo);

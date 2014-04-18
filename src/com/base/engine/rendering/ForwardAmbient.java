@@ -1,8 +1,5 @@
 package com.base.engine.rendering;
 
-import com.base.engine.core.Matrix4f;
-import com.base.engine.core.Transform;
-
 public class ForwardAmbient extends Shader{
 	private static ForwardAmbient instance;
 

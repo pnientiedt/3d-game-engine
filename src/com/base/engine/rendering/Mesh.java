@@ -41,6 +41,7 @@ public class Mesh {
 		addVertices(vertices, indices, calcNormals);
 	}
 	
+	@Override
 	protected void finalize() {
 		if (resource.removeReference() && !fileName.isEmpty()) {
 			loadedModels.remove(fileName);

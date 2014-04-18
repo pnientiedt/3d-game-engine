@@ -9,6 +9,7 @@ import java.util.HashMap;
 import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
 import com.base.engine.core.GameObject;
+import com.base.engine.core.Transform;
 import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.resourceManagement.MappedValues;
 
@@ -67,6 +68,10 @@ public class RenderingEngine extends MappedValues {
 //		activePointLight = pointLightList[0];//new PointLight(new BaseLight(new Vector3f(0,1,0), 0.4f), new Attenuation(0,0,1), new Vector3f(5,0,5), 100);
 //	
 //		spotLight = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1,1), 0.4f), new Attenuation(0,0,0.1f), new Vector3f(lightFieldStartX,0,lightFieldStartY), 100), new Vector3f(1,0,0), 0.7f);
+	}
+	
+	public void updateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType) {
+		throw new IllegalArgumentException(uniformName + " is not a supported type in Rendering Engine");
 	}
 	
 	public void render(GameObject object) {

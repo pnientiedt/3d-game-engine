@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.SampleModel;
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -32,6 +31,7 @@ public class Texture {
 		}
 	}
 	
+	@Override
 	protected void finalize() {
 		if (resource.removeReference() && !fileName.isEmpty()) {
 			loadedTextures.remove(fileName);
