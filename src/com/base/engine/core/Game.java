@@ -10,10 +10,10 @@ public abstract class Game
 		
 	}
 	public void input(float delta) {
-		getRootObject().input(delta);
+		getRootObject().inputAll(delta);
 	}
 	public void update(float delta) {
-		getRootObject().update(delta);
+		getRootObject().updateAll(delta);
 	}
 	
 	public void Render(RenderingEngine renderingEngine) {
@@ -29,5 +29,9 @@ public abstract class Game
 			root = new GameObject();
 		}
 		return root;
+	}
+	
+	public void setEngine(CoreEngine engine) {
+		getRootObject().setEngine(engine);
 	}
 }
