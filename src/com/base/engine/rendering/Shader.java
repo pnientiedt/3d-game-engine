@@ -16,10 +16,14 @@ import com.base.engine.core.Vector3f;
 public class Shader {
 	private int program;
 	private HashMap<String, Integer> uniforms;
+	private ArrayList<String> uniformNames;
+	private ArrayList<String> uniformTypes;
 	
 	public Shader(String fileName) {
 		program = glCreateProgram();
 		uniforms = new HashMap<String, Integer>();
+		uniformNames = new ArrayList<String>();
+		uniformTypes = new ArrayList<String>();
 		
 		if (program == 0) {
 			System.err.println("Shader creation failed: Could not find valid memory location in constructor");
@@ -45,7 +49,38 @@ public class Shader {
 	}
 	
 	public void updateUniforms(Transform transform, Material material, RenderingEngine renderingEngine) {
+		Matrix4f worldMatrix = transform.getTransformation();
+		Matrix4f MVPMatrix = renderingEngine.getMainCamera().getViewProjection().mul(worldMatrix);
 		
+		for (int i = 0; i < uniformNames.size(); i++) {
+			String uniformName = uniformNames.get(i);
+			String uniformType = uniformTypes.get(i);
+			
+			if (uniformName.startsWith("T_")) {
+				if (uniformName.equals("T_MVP")) 
+					setUniform(uniformName, MVPMatrix);
+				else if (uniformName.equals("T_world"))
+					setUniform(uniformName, worldMatrix);
+				else
+					throw new IllegalArgumentException(uniformName + " is not valid component of Transform");
+			} else if (uniformName.startsWith("R_")) {
+				if (uniformType.equals("sampler2D")) {
+					String unprefixedUniformName = uniformName.substring(2);
+					int samplerSlot = renderingEngine.getSamplerSlot(unprefixedUniformName);
+					
+					material.getTexture(unprefixedUniformName).bind(samplerSlot);
+					setUniform(uniformName, samplerSlot);
+				} else if (uniformType.equals("vec3"))
+					setUniform(uniformName, renderingEngine.getVector3f(uniformName.substring(2)));
+				else if (uniformType.equals("float"))
+					setUniform(uniformName, renderingEngine.getFloat(uniformName.substring(2)));
+			} else {
+				if (uniformType.equals("vec3"))
+					setUniform(uniformName, renderingEngine.getVector3f(uniformName));
+				else if (uniformType.equals("float"))
+					setUniform(uniformName, renderingEngine.getFloat(uniformName));
+			}
+		}
 	}
 	
 	private class GLSLStruct {
@@ -159,37 +194,37 @@ public class Shader {
 			String uniformName = uniformLine.substring(whiteSpacePos + 1, uniformLine.length()).trim();
 			String uniformType = uniformLine.substring(0, whiteSpacePos).trim();
 			
-			addUniformWithStructCheck(uniformName, uniformType, structs);
+			addUniform(uniformName, uniformType, structs);
 //			addUniform(uniformName);
 			
 			uniformStartLocation = shaderText.indexOf(UNIFORM_KEYWORD, uniformStartLocation + UNIFORM_KEYWORD.length());
 		}
 	}
 	
-	private void addUniformWithStructCheck(String uniformName, String uniformType, HashMap<String, ArrayList<GLSLStruct>> structs) {
+	private void addUniform(String uniformName, String uniformType, HashMap<String, ArrayList<GLSLStruct>> structs) {
 		boolean addThis = true;
 		ArrayList<GLSLStruct> structComponents = structs.get(uniformType);
 		if (structComponents != null) {
 			addThis = false;
 			for (GLSLStruct struct : structComponents) {
-				addUniformWithStructCheck(uniformName + "." + struct.name, struct.type, structs);
+				addUniform(uniformName + "." + struct.name, struct.type, structs);
 			}
 		}
 		
-		if(addThis)
-			addUniform(uniformName);
-	}
-	
-	private void addUniform(String uniform) {
-		int uniformLocation = glGetUniformLocation(program, uniform);
+		if(!addThis)
+			return;
+		
+		int uniformLocation = glGetUniformLocation(program, uniformName);
 		
 		if (uniformLocation == 0xFFFFFFFF) {
-			System.err.println("Error: Could not find uniform " + uniform);
+			System.err.println("Error: Could not find uniform " + uniformName);
 			new Exception().printStackTrace();
 			System.exit(1);
 		}
 		
-		uniforms.put(uniform, uniformLocation);
+		uniforms.put(uniformName, uniformLocation);
+		uniformNames.add(uniformName);
+		uniformTypes.add(uniformType);
 	}
 	
 	private void addVertexShader(String text) {

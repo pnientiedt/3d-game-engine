@@ -1,8 +1,10 @@
 package com.base.engine.rendering;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.SampleModel;
 import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -10,7 +12,6 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import com.base.engine.core.Util;
-import com.base.engine.rendering.resourceManagement.MeshResource;
 import com.base.engine.rendering.resourceManagement.TextureResource;
 
 public class Texture {
@@ -37,7 +38,14 @@ public class Texture {
 		}
 	}
 	
-	public void bind() {
+	public void bind()
+	{
+		bind(0);
+	}
+	
+	public void bind(int samplerSlot) {
+		assert(samplerSlot >= 0 && samplerSlot <= 31);
+		glActiveTexture(GL_TEXTURE0 + samplerSlot);
 		glBindTexture(GL_TEXTURE_2D, resource.getId());
 	}
 	

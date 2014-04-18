@@ -4,23 +4,31 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
 import com.base.engine.core.GameObject;
 import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.resourceManagement.MappedValues;
 
-public class RenderingEngine {
+public class RenderingEngine extends MappedValues {
 	
 	private Camera mainCamera;
-	private Vector3f ambientLight;
 	
 	private BaseLight activeLight;
 	private ArrayList<BaseLight> lights;
 	
+	private HashMap<String, Integer> samplerMap;
+	
 	public RenderingEngine() {
-		
+		super();
 		lights = new ArrayList<BaseLight>();
+		samplerMap = new HashMap<String, Integer>();
+		
+		samplerMap.put("diffuse", 0);
+		
+		addVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
 		
 		glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 		
@@ -35,7 +43,7 @@ public class RenderingEngine {
 		
 //		mainCamera = new Camera((float)Math.toRadians(70f), (float)Window.getWidth()/(float)Window.getHeight(), 0.1f, 1000);
 	
-		ambientLight = new Vector3f(0.1f, 0.1f, 0.1f);
+//		ambientLight = new Vector3f(0.1f, 0.1f, 0.1f);
 //		activeDirectionalLight = new DirectionalLight(new BaseLight(new Vector3f(0,0,1), 0.4f), new Vector3f(1,1,1));
 //		directionalLight2 = new DirectionalLight(new BaseLight(new Vector3f(1,0,0), 0.4f), new Vector3f(-1,1,-1));
 //		
@@ -61,12 +69,8 @@ public class RenderingEngine {
 //		spotLight = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1,1), 0.4f), new Attenuation(0,0,0.1f), new Vector3f(lightFieldStartX,0,lightFieldStartY), 100), new Vector3f(1,0,0), 0.7f);
 	}
 	
-	public Vector3f getAmbientLight() {
-		return ambientLight;
-	}
-	
 	public void render(GameObject object) {
-		clearScreen();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		lights.clear();
 		object.addToRenderingEngine(this);
@@ -90,30 +94,6 @@ public class RenderingEngine {
 		glDisable(GL_BLEND);
 	}
 	
-	private static void clearScreen() {
-		// TODO: Stencil Buffer
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
-	
-	@SuppressWarnings("unused")
-	private static void setTextures(boolean enabled) {
-		if(enabled) {
-			glEnable(GL_TEXTURE_2D);
-		} else {
-			glDisable(GL_TEXTURE_2D);
-		}
-	}
-	
-	@SuppressWarnings("unused")
-	private static void unbindTextures() {
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
-	
-	@SuppressWarnings("unused")
-	private static void setClearColor(Vector3f color) {
-		glClearColor(color.getX(), color.getY(), color.getZ(), 1.0f);
-	}
-	
 	public static String getOpenGLVersion() {
 		return glGetString(GL_VERSION);
 	}
@@ -124,6 +104,10 @@ public class RenderingEngine {
 	
 	public BaseLight getActiveLight() {
 		return activeLight;
+	}
+	
+	public int getSamplerSlot(String samplerName) {
+		return samplerMap.get(samplerName);
 	}
 	
 	public void addCamera(Camera camera) {
