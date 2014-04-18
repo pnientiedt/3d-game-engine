@@ -15,12 +15,13 @@ import com.base.engine.rendering.resourceManagement.MappedValues;
 
 public class RenderingEngine extends MappedValues {
 	
-	private Camera mainCamera;
 	
+	private HashMap<String, Integer> samplerMap;
 	private BaseLight activeLight;
 	private ArrayList<BaseLight> lights;
 	
-	private HashMap<String, Integer> samplerMap;
+	private Shader forwardAmbient;
+	private Camera mainCamera;
 	
 	public RenderingEngine() {
 		super();
@@ -30,6 +31,8 @@ public class RenderingEngine extends MappedValues {
 		samplerMap.put("diffuse", 0);
 		
 		addVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
+		
+		forwardAmbient = new Shader("forward-ambient");
 		
 		glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 		
@@ -41,33 +44,6 @@ public class RenderingEngine extends MappedValues {
 		glEnable(GL_DEPTH_CLAMP);
 		
 		glEnable(GL_TEXTURE_2D);
-		
-//		mainCamera = new Camera((float)Math.toRadians(70f), (float)Window.getWidth()/(float)Window.getHeight(), 0.1f, 1000);
-	
-//		ambientLight = new Vector3f(0.1f, 0.1f, 0.1f);
-//		activeDirectionalLight = new DirectionalLight(new BaseLight(new Vector3f(0,0,1), 0.4f), new Vector3f(1,1,1));
-//		directionalLight2 = new DirectionalLight(new BaseLight(new Vector3f(1,0,0), 0.4f), new Vector3f(-1,1,-1));
-//		
-//		int lightFieldWidth = 5;
-//		int lightFieldDepth = 5;
-//
-//		float lightFieldStartX = 0;
-//		float lightFieldStartY = 0;
-//		float lightFieldStepX = 7;
-//		float lightFieldStepY = 7;
-//		
-//		pointLightList = new PointLight[lightFieldWidth * lightFieldDepth];
-//
-//		for (int i = 0; i < lightFieldWidth; i++) {
-//			for (int j = 0; j < lightFieldDepth; j++) {
-//				pointLightList[i * lightFieldWidth + j] = new PointLight(new BaseLight(new Vector3f(0, 1, 0), 0.4f), new Attenuation(0, 0, 1),
-//						new Vector3f(lightFieldStartX + lightFieldStepX * i, 0, lightFieldStartY + lightFieldStepY * j), 100);
-//			}
-//		}
-//
-//		activePointLight = pointLightList[0];//new PointLight(new BaseLight(new Vector3f(0,1,0), 0.4f), new Attenuation(0,0,1), new Vector3f(5,0,5), 100);
-//	
-//		spotLight = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1,1), 0.4f), new Attenuation(0,0,0.1f), new Vector3f(lightFieldStartX,0,lightFieldStartY), 100), new Vector3f(1,0,0), 0.7f);
 	}
 	
 	public void updateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType) {
@@ -79,8 +55,6 @@ public class RenderingEngine extends MappedValues {
 		
 		lights.clear();
 		object.addToRenderingEngine(this);
-		
-		Shader forwardAmbient = ForwardAmbient.getInstance();
 		
 		object.render(forwardAmbient, this);
 		

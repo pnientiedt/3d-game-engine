@@ -1,7 +1,7 @@
 package com.base.engine.components;
 
 import com.base.engine.core.Vector3f;
-import com.base.engine.rendering.ForwardPoint;
+import com.base.engine.rendering.Shader;
 
 public class PointLight extends BaseLight{
 	private static final int COLOR_DEPTH = 256;
@@ -18,7 +18,7 @@ public class PointLight extends BaseLight{
 		float c = attenuation.getX() - COLOR_DEPTH * getIntensity() + getColor().max();
 		this.range = (float)((-b + Math.sqrt(b * b - 4 * a * c))/(2 * a));
 		
-		setShader(ForwardPoint.getInstance());
+		setShader(new Shader("forward-point"));
 	}
 
 	public float getConstant() {
