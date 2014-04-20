@@ -10,19 +10,23 @@ public class CoreEngine {
 	private RenderingEngine renderingEngine;
 	private int width;
 	private int height;
+	private boolean fullscreen;
+	private boolean vsync;
 	private double frameTime;
 
-	public CoreEngine(int width, int height, double framerate, Game game) {
+	public CoreEngine(int width, int height, boolean fullscreen, boolean vsync, double framerate, Game game) {
 		isRunning = false;
 		this.game = game;
 		this.width = width;
 		this.height = height;
+		this.fullscreen = fullscreen;
+		this.vsync = vsync;
 		this.frameTime = 1.0/framerate;
 		game.setEngine(this);
 	}
 	
 	public void createWindow(String title) {
-		Window.createWindow(width, height, title);
+		Window.createWindow(width, height, title, fullscreen, vsync);
 		this.renderingEngine = new RenderingEngine();
 	}
 
@@ -80,7 +84,7 @@ public class CoreEngine {
 			}
 
 			if (render) {
-				game.Render(renderingEngine);
+				game.render(renderingEngine);
 				Window.render();
 				frames++;
 			} else {

@@ -16,7 +16,7 @@ public abstract class Game
 		getRootObject().updateAll(delta);
 	}
 	
-	public void Render(RenderingEngine renderingEngine) {
+	public void render(RenderingEngine renderingEngine) {
 		renderingEngine.render(getRootObject());
 	}
 	
