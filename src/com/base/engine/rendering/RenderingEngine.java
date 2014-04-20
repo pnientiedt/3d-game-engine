@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
+import com.base.engine.components.Camera3D;
+import com.base.engine.components.Camera2D;
 import com.base.engine.core.GameObject;
 import com.base.engine.core.Transform;
 import com.base.engine.core.Vector3f;
@@ -21,10 +23,14 @@ public class RenderingEngine extends MappedValues {
 	private ArrayList<BaseLight> lights;
 	
 	private Shader forwardAmbient;
-	private Camera mainCamera;
+	private Shader forwardUI;
+	private Camera3D camera3D;
+	private Camera2D camera2D;
+	private boolean perspective;
 	
 	public RenderingEngine() {
 		super();
+		perspective = true;
 		lights = new ArrayList<BaseLight>();
 		samplerMap = new HashMap<String, Integer>();
 		
@@ -32,7 +38,10 @@ public class RenderingEngine extends MappedValues {
 		
 		addVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
 		
+		addVector3f("ambient2D", new Vector3f(1f, 1f, 1f));
+		
 		forwardAmbient = new Shader("forward-ambient");
+		forwardUI = new Shader("forward-ui");
 		
 		glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 		
@@ -50,7 +59,8 @@ public class RenderingEngine extends MappedValues {
 		throw new IllegalArgumentException(uniformName + " is not a supported type in Rendering Engine");
 	}
 	
-	public void render(GameObject object) {
+	public void render(GameObject object, GameObject ui) {
+		/*** 3D ***/
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		object.renderAll(forwardAmbient, this);
@@ -68,6 +78,14 @@ public class RenderingEngine extends MappedValues {
 		glDepthFunc(GL_LESS);		
 		glDepthMask(true);
 		glDisable(GL_BLEND);
+		
+		/*** 2D ***/
+		perspective = false;
+		
+		ui.renderAll(forwardUI, this);
+		
+		perspective = true;
+		/*** 2D END***/
 	}
 	
 	public static String getOpenGLVersion() {
@@ -85,16 +103,19 @@ public class RenderingEngine extends MappedValues {
 	public int getSamplerSlot(String samplerName) {
 		return samplerMap.get(samplerName);
 	}
-	
-	public void addCamera(Camera camera) {
-		mainCamera = camera;
-	}
 
 	public Camera getMainCamera() {
-		return mainCamera;
+		if (perspective)
+			return camera3D;
+		else
+			return camera2D;
 	}
 
-	public void setMainCamera(Camera mainCamera) {
-		this.mainCamera = mainCamera;
+	public void setCamera3D(Camera3D camera3D) {
+		this.camera3D = camera3D;
+	}
+
+	public void addCamera2D(Camera2D camera2d) {
+		this.camera2D = camera2d;
 	}
 }

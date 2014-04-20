@@ -16,6 +16,7 @@ public class MeshRenderer extends GameComponent {
 	@Override
 	public void render(Shader shader, RenderingEngine renderingEngine) {
 		shader.bind();
+		System.out.println(getTransform().getPos());
 		shader.updateUniforms(getTransform(), material, renderingEngine);
 		mesh.draw();
 	}
