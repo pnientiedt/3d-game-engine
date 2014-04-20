@@ -68,7 +68,6 @@ public class Window {
 					if ((current.getWidth() == width) && (current.getHeight() == height)) {
 						if ((targetDisplayMode == null) || (current.getFrequency() >= freq)) {
 							if ((targetDisplayMode == null) || (current.getBitsPerPixel() > targetDisplayMode.getBitsPerPixel())) {
-								System.out.println("found");
 								targetDisplayMode = current;
 								freq = targetDisplayMode.getFrequency();
 							}
