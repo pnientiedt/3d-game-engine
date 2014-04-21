@@ -10,9 +10,9 @@ import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
 import com.base.engine.components.Camera3D;
 import com.base.engine.components.Camera2D;
-import com.base.engine.core.GameObject;
 import com.base.engine.core.Transform;
 import com.base.engine.core.Vector3f;
+import com.base.engine.objects.GameObject;
 import com.base.engine.rendering.resourceManagement.MappedValues;
 
 public class RenderingEngine extends MappedValues {

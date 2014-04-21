@@ -1,8 +1,10 @@
-package com.base.engine.core;
+package com.base.engine.objects;
 
 import java.util.ArrayList;
 
 import com.base.engine.components.GameComponent;
+import com.base.engine.core.CoreEngine;
+import com.base.engine.core.Transform;
 import com.base.engine.rendering.RenderingEngine;
 import com.base.engine.rendering.Shader;
 

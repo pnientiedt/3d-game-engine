@@ -2,6 +2,8 @@ package com.base.game;
 
 import com.base.engine.components.*;
 import com.base.engine.core.*;
+import com.base.engine.objects.GameObject;
+import com.base.engine.objects.Player;
 import com.base.engine.rendering.*;
 
 public class TestGame extends Game
@@ -87,10 +89,11 @@ public class TestGame extends Game
 		testMesh2.getTransform().getPos().set(0, 0, 5);
 
 		testMesh1.addChild(testMesh2);
-		testMesh2
+//		testMesh2
 		//getRootObject()
-						.addChild(new GameObject().addComponent(new FreeLook()).addComponent(new FreeMove()).addComponent(new Camera3D((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(), 0.01f, 1000.0f)));
+//						.addChild(new GameObject().addComponent(new FreeLook()).addComponent(new FreeMove()).addComponent(new Camera3D((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(), 0.01f, 1000.0f)));
 
+		addObject(new Player());
 		addObject(testMesh1);
 		addObject(testMesh3);
 		

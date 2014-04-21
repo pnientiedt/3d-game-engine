@@ -1,5 +1,6 @@
 package com.base.engine.core;
 
+import com.base.engine.objects.GameObject;
 import com.base.engine.rendering.RenderingEngine;
 
 public abstract class Game 
