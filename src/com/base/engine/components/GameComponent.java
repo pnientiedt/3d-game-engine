@@ -22,6 +22,10 @@ public abstract class GameComponent {
 		this.parent = parent;
 	}
 	
+	public GameObject getParent() {
+		return parent;
+	}
+	
 	public Transform getTransform() {
 		return parent.getTransform();
 	}

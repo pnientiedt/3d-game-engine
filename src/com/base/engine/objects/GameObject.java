@@ -11,6 +11,7 @@ import com.base.engine.rendering.Shader;
 public class GameObject {
 	private ArrayList<GameObject> children;
 	private ArrayList<GameComponent> components;
+	private GameObject parent;
 	private Transform transform;
 	private CoreEngine engine;
 
@@ -36,9 +37,18 @@ public class GameObject {
 	public Transform getTransform() {
 		return transform;
 	}
+	
+	public void setParent(GameObject object) {
+		this.parent = object;
+	}
+	
+	public GameObject getParent() {
+		return parent;
+	}
 
 	public void addChild(GameObject child) {
 		children.add(child);
+		child.setParent(this);
 		child.setEngine(engine);
 		child.getTransform().setParent(transform);
 	}

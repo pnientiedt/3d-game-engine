@@ -3,7 +3,7 @@ package com.base.game;
 import com.base.engine.components.*;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
-import com.base.engine.objects.Player;
+import com.base.engine.objects.PlayerThirdPersonView;
 import com.base.engine.rendering.*;
 
 public class TestGame extends Game
@@ -93,7 +93,6 @@ public class TestGame extends Game
 		//getRootObject()
 //						.addChild(new GameObject().addComponent(new FreeLook()).addComponent(new FreeMove()).addComponent(new Camera3D((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(), 0.01f, 1000.0f)));
 
-		addObject(new Player());
 		addObject(testMesh1);
 		addObject(testMesh3);
 		
@@ -103,6 +102,14 @@ public class TestGame extends Game
 		addObject(new GameObject().addComponent(new MeshRenderer(new Mesh("monkey3.obj"), material2)));
 
 		directionalLight.getTransform().setRot(new Quaternion(new Vector3f(1,0,0), (float)Math.toRadians(-45)));
+		
+		//Player
+		Material playerMaterial = new Material();
+		playerMaterial.addTexture("diffuse", new Texture("bricks.jpg"));
+		playerMaterial.addFloat("specularIntensity", 1f);
+		playerMaterial.addFloat("specularPower", 8f);
+		Mesh playerMesh = new Mesh("monkey3.obj");
+		addObject(new PlayerThirdPersonView().addComponent(new MeshRenderer(playerMesh, playerMaterial)));
 		
 		//UI
 		

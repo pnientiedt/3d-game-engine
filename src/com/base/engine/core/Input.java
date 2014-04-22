@@ -3,6 +3,8 @@ package com.base.engine.core;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import com.base.engine.rendering.Window;
+
 public class Input {
 
 	// All these constants come from LWJGL's Keyboard class
@@ -140,12 +142,19 @@ public class Input {
 	public final static int KEY_APPS = 0xDD; /* AppMenu key */
 	public final static int KEY_POWER = 0xDE;
 	public final static int KEY_SLEEP = 0xDF;
+	
+	public enum MouseState {
+		CURSOR, DELTA
+	}
 
 	public final static int NUM_KEYCODES = 256;
 	public final static int NUM_MOUSEBUTTONS = 10;
 
 	private static boolean[] lastKeys = new boolean[NUM_KEYCODES];
 	private static boolean[] lastMouse = new boolean[NUM_MOUSEBUTTONS];
+	
+	private static MouseState mouseState = MouseState.CURSOR;
+	private static Vector2f initialMousePosition;
 
 	public static void update() {
 		for (int i = 0; i < NUM_KEYCODES; i++)
@@ -153,6 +162,9 @@ public class Input {
 
 		for (int i = 0; i < NUM_MOUSEBUTTONS; i++)
 			lastMouse[i] = getMouse(i);
+		
+		if (Input.mouseState == MouseState.DELTA)
+			setMousePosition(Window.getCenter());
 	}
 
 	public static boolean getKey(int keyCode) {
@@ -189,5 +201,24 @@ public class Input {
 
 	public static void setCursor(boolean enabled) {
 		Mouse.setGrabbed(!enabled);
+	}
+	
+	public static void setMouseState(MouseState mouseState) {
+		if (Input.mouseState != mouseState) {
+			Input.mouseState = mouseState;
+			if(mouseState == MouseState.CURSOR) {
+				setCursor(true);
+				setMousePosition(initialMousePosition);
+			}
+			else if (mouseState == MouseState.DELTA) {
+				setCursor(false);
+				initialMousePosition = getMousePosition();
+				setMousePosition(Window.getCenter());
+			}
+		}
+	}
+	
+	public static Vector2f getMouseDelta() {
+		return getMousePosition().sub(Window.getCenter());
 	}
 }

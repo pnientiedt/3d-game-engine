@@ -54,8 +54,4 @@ public class FreeLook extends GameComponent {
 				Input.setMousePosition(centerPosition);
 		}
 	}
-
-	public void move(Vector3f dir, float amt) {
-		getTransform().setPos(getTransform().getPos().add(dir.mul(amt)));
-	}
 }
