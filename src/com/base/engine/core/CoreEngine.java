@@ -1,5 +1,6 @@
 package com.base.engine.core;
 
+import com.base.engine.physics.PhysicEngine;
 import com.base.engine.rendering.RenderingEngine;
 import com.base.engine.rendering.Window;
 
@@ -8,6 +9,7 @@ public class CoreEngine {
 	private boolean isRunning;
 	private Game game;
 	private RenderingEngine renderingEngine;
+	private PhysicEngine physicEngine;
 	private int width;
 	private int height;
 	private boolean fullscreen;
@@ -28,6 +30,7 @@ public class CoreEngine {
 	public void createWindow(String title) {
 		Window.createWindow(width, height, title, fullscreen, vsync);
 		this.renderingEngine = new RenderingEngine();
+		this.physicEngine = new PhysicEngine();
 	}
 
 	public void start() {
@@ -107,6 +110,10 @@ public class CoreEngine {
 	
 	public RenderingEngine getRenderingEngine() {
 		return renderingEngine;
+	}
+	
+	public PhysicEngine getPhysicEngine() {
+		return physicEngine;
 	}
 
 }
