@@ -51,7 +51,7 @@ public class FreeLook extends GameComponent {
 				getTransform().rotate(getTransform().getRot().getRight(), (float) Math.toRadians(-deltaPos.getY() * sensitivity));
 
 			if (rotY || rotX)
-				Input.setMousePosition(new Vector2f(Window.getWidth() / 2, Window.getHeight() / 2));
+				Input.setMousePosition(centerPosition);
 		}
 	}
 
