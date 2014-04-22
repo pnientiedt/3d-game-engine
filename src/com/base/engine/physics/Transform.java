@@ -1,4 +1,8 @@
-package com.base.engine.core;
+package com.base.engine.physics;
+
+import com.base.engine.core.Matrix4f;
+import com.base.engine.core.Quaternion;
+import com.base.engine.core.Vector3f;
 
 
 public class Transform {

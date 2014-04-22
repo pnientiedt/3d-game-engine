@@ -13,9 +13,9 @@ import com.base.engine.components.DirectionalLight;
 import com.base.engine.components.PointLight;
 import com.base.engine.components.SpotLight;
 import com.base.engine.core.Matrix4f;
-import com.base.engine.core.Transform;
 import com.base.engine.core.Util;
 import com.base.engine.core.Vector3f;
+import com.base.engine.physics.Transform;
 import com.base.engine.rendering.resourceManagement.ShaderResource;
 
 public class Shader {

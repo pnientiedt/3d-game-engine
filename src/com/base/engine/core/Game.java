@@ -1,6 +1,7 @@
 package com.base.engine.core;
 
 import com.base.engine.objects.GameObject;
+import com.base.engine.physics.PhysicEngine;
 import com.base.engine.rendering.RenderingEngine;
 
 public abstract class Game 
@@ -15,8 +16,8 @@ public abstract class Game
 		getRootObject().inputAll(delta);
 		getUI().inputAll(delta);
 	}
-	public void update(float delta) {
-		getRootObject().updateAll(delta);
+	public void update(PhysicEngine physicEngine, float delta) {
+		physicEngine.update(delta, getRootObject());
 		getUI().updateAll(delta);
 	}
 	

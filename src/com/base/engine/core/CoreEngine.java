@@ -77,7 +77,7 @@ public class CoreEngine {
 				game.input((float)frameTime);
 				Input.update();
 
-				game.update((float)frameTime);
+				game.update(physicEngine, (float)frameTime);
 
 				if (frameCounter >= 1) {
 					System.out.println(frames);

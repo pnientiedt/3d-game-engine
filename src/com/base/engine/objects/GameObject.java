@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import com.base.engine.components.GameComponent;
 import com.base.engine.core.CoreEngine;
-import com.base.engine.core.Transform;
+import com.base.engine.core.Vector3f;
+import com.base.engine.physics.Transform;
 import com.base.engine.rendering.RenderingEngine;
 import com.base.engine.rendering.Shader;
 
@@ -13,6 +14,8 @@ public class GameObject {
 	private ArrayList<GameComponent> components;
 	private GameObject parent;
 	private Transform transform;
+	private Vector3f velocity;
+	private Vector3f acceleration;
 	private CoreEngine engine;
 
 	public GameObject() {
@@ -36,6 +39,22 @@ public class GameObject {
 
 	public Transform getTransform() {
 		return transform;
+	}
+	
+	public void setVelocity(Vector3f velocity) {
+		this.velocity = velocity;
+	}
+	
+	public Vector3f getVelocity() {
+		return velocity;
+	}
+	
+	public void setAcceleration(Vector3f acceleration) {
+		this.acceleration = acceleration;
+	}
+	
+	public Vector3f getAcceleration() {
+		return acceleration;
 	}
 	
 	public void setParent(GameObject object) {
