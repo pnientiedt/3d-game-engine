@@ -6,6 +6,7 @@ import com.base.engine.components.FreeMove;
 import com.base.engine.components.Jump;
 import com.base.engine.components.Zoom;
 import com.base.engine.core.Input;
+import com.base.engine.core.Quaternion;
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.Window;
@@ -23,7 +24,7 @@ public class PlayerThirdPersonView extends GameObject {
 		//XY Player Movement
 		addComponent(new FreeMove());
 		//Y Axis Player Movement
-		addComponent(new AxisRotate(new Vector3f(0,1,0), new Vector2f(1,0), 1, mouseSensitivity));
+		addComponent(new AxisRotate(new Vector3f(0,1,0), new Vector2f(1,0), Input.MOUSE_RIGHT, mouseSensitivity));
 		
 		addComponent(new Jump(15, Input.KEY_SPACE));
 		
@@ -36,7 +37,11 @@ public class PlayerThirdPersonView extends GameObject {
 		//Zoom via mouse wheel
 		camera.addComponent(new Zoom(zoomSensitivity));
 		//Z Axis rotation around the player
-		camera.addComponent(new AxisRotate(new Vector3f(1,0,0), new Vector2f(0,1), 1, true, mouseSensitivity));
+		camera.addComponent(new AxisRotate(new Vector3f(1,0,0), new Vector2f(0,1), Input.MOUSE_RIGHT, true, mouseSensitivity));
+		
+		//Left Key camera rotation
+		camera.addComponent(new AxisRotate(new Vector3f(0,1,0), new Vector2f(1,0), Input.MOUSE_LEFT, true, mouseSensitivity));
+		camera.addComponent(new AxisRotate(Quaternion.Axis.RIGHT, new Vector2f(0,1), Input.MOUSE_LEFT, true, mouseSensitivity));
 		
 		addChild(camera);		
 	}

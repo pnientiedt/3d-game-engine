@@ -2,11 +2,13 @@ package com.base.engine.components;
 
 import com.base.engine.core.Input;
 import com.base.engine.core.Input.MouseState;
+import com.base.engine.core.Quaternion;
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
 
 public class AxisRotate extends GameComponent {
 	private boolean mouseLocked = false;
+	private Quaternion.Axis axisState;
 	private Vector3f axis;
 	private Vector2f mouseAxis;
 	private int mouseButton;
@@ -16,6 +18,14 @@ public class AxisRotate extends GameComponent {
 	
 	public AxisRotate(Vector3f axis, Vector2f mouseAxis, int mouseButton, float sensitivity) {
 		this(axis, mouseAxis, mouseButton, false, sensitivity);
+	}
+	
+	public AxisRotate(Quaternion.Axis axisState, Vector2f mouseAxis, int mouseButton, boolean rotateAroundParent, float sensitivity) {
+		this.axisState = axisState;
+		this.mouseAxis = mouseAxis;
+		this.mouseButton = mouseButton;
+		this.rotateAroundParent = rotateAroundParent;
+		this.sensitivity = sensitivity;
 	}
 	
 	public AxisRotate(Vector3f axis, Vector2f mouseAxis, int mouseButton, boolean rotateAroundParent, float sensitivity) {
@@ -29,6 +39,9 @@ public class AxisRotate extends GameComponent {
 	@Override
 	public void input(float delta) {
 		
+		if (axisState != null)
+			axis = getTransform().getRot().getAxis(axisState);
+		
 		if (Input.getMouseUp(mouseButton)) {
 			Input.setMouseState(MouseState.CURSOR);
 			mouseLocked = false;
@@ -39,6 +52,9 @@ public class AxisRotate extends GameComponent {
 		}
 
 		if (mouseLocked) {		
+			
+			
+			
 			if (rotateAroundParent) {
 				distanceToParent = getTransform().getPos().length();
 			}

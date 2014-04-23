@@ -177,6 +177,28 @@ public class Quaternion {
 		return new Vector3f(-1,0,0).rotate(this);
 	}
 	
+	public enum Axis {
+		FORWARD, BACK, UP, DOWN, RIGHT, LEFT;
+	}
+	
+	public Vector3f getAxis(Axis axis) {
+		switch (axis) {
+		case FORWARD:
+			return getForward();
+		case BACK:
+			return getBack();
+		case UP:
+			return getUp();
+		case DOWN:
+			return getDown();
+		case RIGHT:
+			return getRight();
+		case LEFT:
+			return getLeft();
+		}
+		return new Vector3f(0, 0, 0);
+	}
+	
 	public Quaternion set(float x, float y, float z, float w) {
 		this.x = x;
 		this.y = y;

@@ -143,6 +143,9 @@ public class Input {
 	public final static int KEY_POWER = 0xDE;
 	public final static int KEY_SLEEP = 0xDF;
 	
+	public final static int MOUSE_LEFT = 0;
+	public final static int MOUSE_RIGHT = 1;
+	
 	public enum MouseState {
 		CURSOR, DELTA
 	}
