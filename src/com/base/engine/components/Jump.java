@@ -1,26 +1,23 @@
 package com.base.engine.components;
 
 import com.base.engine.core.Input;
-import com.base.engine.core.Vector3f;
+import com.base.engine.physics.PhysicEngine;
 
 public class Jump extends GameComponent {
-	private float speed;
-	private int jumKey;
+	private float initialVelocity;
+	private int jumpKey;
 	
-	public Jump(float speed, int jumKey, int backKey, int leftKey, int rightKey) {
-		this.speed = speed;
-		this.jumKey = jumKey;
+	public Jump(float initialVelocity, int jumKey) {
+		this.initialVelocity = initialVelocity;
+		this.jumpKey = jumKey;
 	}
 
 	@Override
 	public void input(float delta) {
-		float movAmt = speed * delta;
+		if (Input.getKey(jumpKey)) {
+			getVelocity().setY(initialVelocity);
+			getAcceleration().setY(-PhysicEngine.getGravity());
+		}
 		
-		if (Input.getKey(jumKey))
-			move(getTransform().getRot().getForward(), movAmt);
-	}
-
-	public void move(Vector3f dir, float amt) {
-		getTransform().setPos(getTransform().getPos().add(dir.mul(amt)));
 	}
 }

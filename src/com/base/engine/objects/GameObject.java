@@ -29,13 +29,25 @@ public class GameObject {
 
 	public ArrayList<GameObject> getAllAttached() {
 		ArrayList<GameObject> result = new ArrayList<GameObject>();
-		;
 
 		for (GameObject child : children) {
 			result.addAll(child.getAllAttached());
 		}
 
 		result.add(this);
+		return result;
+	}
+	
+	public ArrayList<GameObject> getAllMovingAttached() {
+		ArrayList<GameObject> result = new ArrayList<GameObject>();
+
+		for (GameObject child : children) {
+			result.addAll(child.getAllMovingAttached());
+		}
+
+		if (velocity.length() > 0 || acceleration.length() > 0)
+			result.add(this);
+		
 		return result;
 	}
 

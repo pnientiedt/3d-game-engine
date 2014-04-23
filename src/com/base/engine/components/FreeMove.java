@@ -30,7 +30,7 @@ public class FreeMove extends GameComponent {
 	public void input(float delta) {
 //		float movAmt = speed * delta;
 		
-		Vector3f velocity = new Vector3f(0,0,0);
+		Vector3f velocity = new Vector3f(0,getVelocity().getY(),0);
 		
 //		System.out.println(getTransform().getRot().getForward());
 //		System.out.println(getTransform().getRot().getForward().mul(speed));
