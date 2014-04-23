@@ -178,7 +178,7 @@ public class Quaternion {
 	}
 	
 	public enum Axis {
-		FORWARD, BACK, UP, DOWN, RIGHT, LEFT;
+		FORWARD, BACK, UP, DOWN, RIGHT, LEFT, X, Y, Z;
 	}
 	
 	public Vector3f getAxis(Axis axis) {
@@ -195,8 +195,16 @@ public class Quaternion {
 			return getRight();
 		case LEFT:
 			return getLeft();
+		case X:
+			return new Vector3f(1, 0, 0);
+		case Y:
+			return new Vector3f(0, 1, 0);
+		case Z:
+			return new Vector3f(0, 0, 1);
+		default:
+			break;
 		}
-		return new Vector3f(0, 0, 0);
+		return null;
 	}
 	
 	public Quaternion set(float x, float y, float z, float w) {

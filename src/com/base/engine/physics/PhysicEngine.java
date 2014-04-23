@@ -9,7 +9,6 @@ public class PhysicEngine {
 	public void update(float delta, GameObject rootObject) {
 		//update objects
 		rootObject.updateAll(delta);
-		System.out.println(rootObject.getAllMovingAttached().size());
 		//calculate physics
 		for (GameObject object : rootObject.getAllMovingAttached()) {
 			

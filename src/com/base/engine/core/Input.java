@@ -146,6 +146,8 @@ public class Input {
 	public final static int MOUSE_LEFT = 0;
 	public final static int MOUSE_RIGHT = 1;
 	
+	private static int deltaUsed = 0;
+	
 	public enum MouseState {
 		CURSOR, DELTA
 	}
@@ -206,7 +208,18 @@ public class Input {
 		Mouse.setGrabbed(!enabled);
 	}
 	
-	public static void setMouseState(MouseState mouseState) {
+	public static void subscribeDelta() {
+		deltaUsed++;
+		setMouseState(MouseState.DELTA);
+	}
+	
+	public static void releaseDelta() {
+		deltaUsed--;
+		if (deltaUsed < 1)
+			setMouseState(MouseState.CURSOR);
+	}
+	
+	private static void setMouseState(MouseState mouseState) {
 		if (Input.mouseState != mouseState) {
 			Input.mouseState = mouseState;
 			if(mouseState == MouseState.CURSOR) {
@@ -222,6 +235,9 @@ public class Input {
 	}
 	
 	public static Vector2f getMouseDelta() {
-		return getMousePosition().sub(Window.getCenter());
+		if (Input.mouseState == MouseState.DELTA)
+			return getMousePosition().sub(Window.getCenter());
+		else
+			return new Vector2f(0,0);
 	}
 }
