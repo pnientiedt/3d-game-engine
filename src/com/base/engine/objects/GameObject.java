@@ -22,6 +22,8 @@ public class GameObject {
 		children = new ArrayList<GameObject>();
 		components = new ArrayList<GameComponent>();
 		transform = new Transform();
+		velocity = new Vector3f(0,0,0);
+		acceleration = new Vector3f(0,0,0);
 		engine = null;
 	}
 

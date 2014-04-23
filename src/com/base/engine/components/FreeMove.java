@@ -28,19 +28,37 @@ public class FreeMove extends GameComponent {
 
 	@Override
 	public void input(float delta) {
-		float movAmt = speed * delta;
+//		float movAmt = speed * delta;
+		
+		Vector3f velocity = new Vector3f(0,0,0);
+		
+//		System.out.println(getTransform().getRot().getForward());
+//		System.out.println(getTransform().getRot().getForward().mul(speed));
+//		System.out.println(velocity.add(getTransform().getRot().getForward().mul(speed)));
 		
 		if (Input.getKey(forwardKey))
-			move(getTransform().getRot().getForward(), movAmt);
+			velocity = velocity.add(getTransform().getRot().getForward().mul(speed));
 		if (Input.getKey(backKey))
-			move(getTransform().getRot().getForward(), -movAmt);
+			velocity = velocity.add(getTransform().getRot().getForward().mul(-speed));
 		if (Input.getKey(leftKey))
-			move(getTransform().getRot().getLeft(), movAmt);
+			velocity = velocity.add(getTransform().getRot().getLeft().mul(speed));
 		if (Input.getKey(rightKey))
-			move(getTransform().getRot().getRight(), movAmt);
+			velocity = velocity.add(getTransform().getRot().getRight().mul(speed));
+//		if (velocity.length() > 0)
+//		System.out.println(velocity);
+//		if (Input.getKey(forwardKey))
+//			move(getTransform().getRot().getForward(), movAmt);
+//		if (Input.getKey(backKey))
+//			move(getTransform().getRot().getForward(), -movAmt);
+//		if (Input.getKey(leftKey))
+//			move(getTransform().getRot().getLeft(), movAmt);
+//		if (Input.getKey(rightKey))
+//			move(getTransform().getRot().getRight(), movAmt);
+		
+		setVelocity(velocity);
 	}
 
 	public void move(Vector3f dir, float amt) {
-		getTransform().setPos(getTransform().getPos().add(dir.mul(amt)));
+//		getTransform().setPos(getTransform().getPos().add(dir.mul(amt)));
 	}
 }
