@@ -4,15 +4,23 @@ import com.base.engine.core.Input;
 import com.base.engine.core.Control;
 
 public class ControlRightMouse extends Control {
+	
+	private boolean active;
 
 	@Override
 	public boolean isActivated() {
-		return Input.getMouseDown(Input.MOUSE_RIGHT);
+		boolean activated = Input.getMouse(Input.MOUSE_RIGHT) && !active;
+		if (activated)
+			active = true;
+		return activated;
 	}
 
 	@Override
 	public boolean isDeactivated() {
-		return Input.getMouseUp(Input.MOUSE_RIGHT);
+		boolean deactivated = !Input.getMouse(Input.MOUSE_RIGHT) && active;
+		if(deactivated)
+			active = false;
+		return deactivated;
 	}
 
 

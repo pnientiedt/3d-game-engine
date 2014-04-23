@@ -9,10 +9,8 @@ public class ControlLeftMouse extends Control {
 
 	@Override
 	public boolean isActivated() {
-		boolean activated = Input.getMouseDown(Input.MOUSE_LEFT) && 
-				!Input.getMouseDown(Input.MOUSE_RIGHT) && 
-				!Input.getMouse(Input.MOUSE_RIGHT) && 
-				Input.getMouse(Input.MOUSE_LEFT) &&
+		boolean activated = Input.getMouse(Input.MOUSE_LEFT) &&
+				!Input.getMouse(Input.MOUSE_RIGHT) &&
 				!active;
 		if (activated)
 			active = true;
@@ -21,8 +19,7 @@ public class ControlLeftMouse extends Control {
 
 	@Override
 	public boolean isDeactivated() {
-		boolean deactivated = (Input.getMouseUp(Input.MOUSE_LEFT) || 
-				Input.getMouseDown(Input.MOUSE_RIGHT) || 
+		boolean deactivated = (!Input.getMouse(Input.MOUSE_LEFT) ||
 				Input.getMouse(Input.MOUSE_RIGHT)) && 
 				active;
 		if (deactivated) 

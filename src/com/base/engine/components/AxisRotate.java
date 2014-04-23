@@ -30,12 +30,10 @@ public class AxisRotate extends GameComponent {
 	public void input(float delta) {
 		
 		if (control.isDeactivated()) {
-			System.out.println("deactivated by " + control);
 			Input.releaseDelta();
 			mouseLocked = false;
 		}
 		if (control.isActivated()) {
-			System.out.println("activated by " + control);
 			Input.subscribeDelta();
 			mouseLocked = true;
 		}
