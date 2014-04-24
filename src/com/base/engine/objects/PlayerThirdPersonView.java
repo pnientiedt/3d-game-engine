@@ -4,6 +4,7 @@ import com.base.engine.components.AxisMove;
 import com.base.engine.components.AxisRotate;
 import com.base.engine.components.Camera3D;
 import com.base.engine.components.Jump;
+import com.base.engine.components.ResetCameraToPlayer;
 import com.base.engine.components.ResetPlayerToCamera;
 import com.base.engine.components.Zoom;
 import com.base.engine.control.ControlForward;
@@ -61,5 +62,6 @@ public class PlayerThirdPersonView extends GameObject {
 		addChild(camera);		
 		
 		addComponent(new ResetPlayerToCamera(getTransform(), camera.getTransform(), Input.MOUSE_RIGHT));
+		camera.addComponent(new ResetCameraToPlayer(getTransform(), camera.getTransform()));
 	}
 }
