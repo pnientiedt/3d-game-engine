@@ -154,4 +154,18 @@ public class Matrix4f {
 	public void set(int x, int y, float value) {
 		m[x][y] = value;
 	}
+	
+	public String toString() {
+		String result = "";
+		
+		for (int i = 0; i < 4; i++) {
+			result += "[";
+			for (int j = 0; j < 4; j++) {
+				result += m[i][j] + " ";
+			}
+			result += "]\n";
+		}
+		
+		return result;
+	}
 }
