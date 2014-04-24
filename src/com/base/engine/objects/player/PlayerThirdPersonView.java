@@ -1,11 +1,17 @@
 package com.base.engine.objects.player;
 
+import com.base.engine.components.AxisMove;
 import com.base.engine.components.AxisRotate;
 import com.base.engine.components.Camera3D;
-import com.base.engine.components.FreeMove;
 import com.base.engine.components.Jump;
 import com.base.engine.components.ResetPlayerToCamera;
 import com.base.engine.components.Zoom;
+import com.base.engine.control.ControlForward;
+import com.base.engine.control.ControlLeftMouse;
+import com.base.engine.control.ControlMoveLeftRight;
+import com.base.engine.control.ControlRightMouse;
+import com.base.engine.control.ControlRotateLeftRight;
+import com.base.engine.control.KeyControl;
 import com.base.engine.core.Input;
 import com.base.engine.core.Quaternion;
 import com.base.engine.core.Vector2f;
@@ -24,7 +30,15 @@ public class PlayerThirdPersonView extends GameObject {
 		super();
 		
 		//XY Player Movement
-		addComponent(new FreeMove());
+		int speed = 10;
+		int rotationSensitivity = 2;
+		ControlForward controlForward = new ControlForward(Input.KEY_W);
+		addComponent(new AxisMove(Quaternion.Axis.FORWARD, speed, controlForward));
+		addComponent(new AxisMove(Quaternion.Axis.BACK, speed, new KeyControl(Input.KEY_S)));
+		addComponent(new AxisMove(Quaternion.Axis.LEFT, speed, new ControlMoveLeftRight(controlForward, Input.KEY_A)));
+		addComponent(new AxisMove(Quaternion.Axis.RIGHT, speed,new ControlMoveLeftRight(controlForward, Input.KEY_D)));
+		addComponent(new AxisRotate(Quaternion.Axis.DOWN, null, new ControlRotateLeftRight(controlForward,  Input.KEY_A) , rotationSensitivity));
+		addComponent(new AxisRotate(Quaternion.Axis.UP, null, new ControlRotateLeftRight(controlForward,  Input.KEY_D) , rotationSensitivity));
 		//Y Axis Player Movement
 		addComponent(new AxisRotate(Quaternion.Axis.Y, new Vector2f(1,0), new ControlRightMouse(), mouseSensitivity));
 		

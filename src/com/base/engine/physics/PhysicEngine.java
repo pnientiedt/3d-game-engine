@@ -23,6 +23,8 @@ public class PhysicEngine {
 			if (object.getAcceleration().getY() != 0) {
 				object.getVelocity().setY(object.getVelocity().getY() + object.getAcceleration().getY() * delta);
 			}
+			
+			object.getVelocity().set(0, object.getVelocity().getY(), 0);
 		}
 	}
 

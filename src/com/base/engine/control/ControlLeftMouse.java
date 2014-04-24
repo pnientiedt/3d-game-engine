@@ -1,7 +1,6 @@
-package com.base.engine.objects.player;
+package com.base.engine.control;
 
 import com.base.engine.core.Input;
-import com.base.engine.core.Control;
 
 public class ControlLeftMouse extends Control {
 	
@@ -26,6 +25,16 @@ public class ControlLeftMouse extends Control {
 			active = false;
 		
 		return deactivated;
+	}
+
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+	
+	@Override
+	public boolean isMouseControl() {
+		return true;
 	}
 
 }
