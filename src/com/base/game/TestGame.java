@@ -3,7 +3,7 @@ package com.base.game;
 import com.base.engine.components.*;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
-import com.base.engine.objects.player.PlayerThirdPersonView;
+import com.base.engine.objects.PlayerThirdPersonView;
 import com.base.engine.rendering.*;
 
 public class TestGame extends Game

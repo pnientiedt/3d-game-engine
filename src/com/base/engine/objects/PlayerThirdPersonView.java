@@ -1,4 +1,4 @@
-package com.base.engine.objects.player;
+package com.base.engine.objects;
 
 import com.base.engine.components.AxisMove;
 import com.base.engine.components.AxisRotate;
@@ -16,7 +16,6 @@ import com.base.engine.core.Input;
 import com.base.engine.core.Quaternion;
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
-import com.base.engine.objects.GameObject;
 import com.base.engine.rendering.Window;
 
 public class PlayerThirdPersonView extends GameObject {
