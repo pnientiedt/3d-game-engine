@@ -13,8 +13,8 @@ public abstract class Game
 		
 	}
 	public void input(float delta) {
-		getRootObject().inputAll(delta);
 		getUI().inputAll(delta);
+		getRootObject().inputAll(delta);
 	}
 	public void update(PhysicEngine physicEngine, float delta) {
 		physicEngine.update(delta, getRootObject());

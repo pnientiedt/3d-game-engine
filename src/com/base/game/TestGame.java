@@ -1,10 +1,17 @@
 package com.base.game;
 
+import java.awt.FontFormatException;
+import java.io.IOException;
+
+import org.newdawn.slick.Color;
+
 import com.base.engine.components.*;
+import com.base.engine.components.ui.InputField;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
 import com.base.engine.objects.PlayerThirdPersonView;
 import com.base.engine.rendering.*;
+import com.base.engine.rendering.text.FontService;
 
 public class TestGame extends Game
 {
@@ -135,5 +142,18 @@ public class TestGame extends Game
 		addToUI(uiObject.addComponent(uiRenderer));
 		
 		addToUI(new GameObject().addComponent(new Camera2D()));
+		
+		//INPUT
+		InputField inputField = new InputField();
+		try {
+			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		GameObject inputFieldObject = new GameObject().addComponent(inputField);
+		inputFieldObject.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
+		
+		addToUI(inputFieldObject);
 	}
 }

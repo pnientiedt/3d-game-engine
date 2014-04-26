@@ -98,16 +98,6 @@ public class RenderingEngine extends MappedValues {
 		perspective = false;
 		
 		ui.renderAll(forwardUI, this);
-		
-		try {
-			FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44).render(50,350,"Hallo Tobi, dies ist dein Font :)", Color.white);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		perspective = true;
 		/*** 2D END***/

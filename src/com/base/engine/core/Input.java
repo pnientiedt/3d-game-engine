@@ -1,6 +1,8 @@
 package com.base.engine.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -165,6 +167,9 @@ public class Input {
 	
 	private static MouseState mouseState = MouseState.CURSOR;
 	private static Vector2f initialMousePosition;
+	
+	public static HashMap<Integer, Character> lowerCase;
+	public static HashMap<Integer, Character> upperCase;
 
 	public static void update() {
 		consumedKeys.clear();
@@ -263,5 +268,37 @@ public class Input {
 			return getMousePosition().sub(Window.getCenter());
 		else
 			return new Vector2f(0,0);
+	}
+	
+	private static void initKeyMap() {
+		if (lowerCase != null && upperCase != null)
+			return;
+		lowerCase = new HashMap<Integer, Character>();
+		upperCase = new HashMap<Integer, Character>();
+		
+		addToMap(43, '^', '°');
+		addToMap(2, '1', '!');
+		addToMap(3, '2', '"');
+		addToMap(4, '3', '§');
+	}
+	
+	private static void addToMap(int keyCode, char lower, char upper) {
+		lowerCase.put(keyCode, lower);
+		upperCase.put(keyCode, upper);
+	}
+	
+	public static Set<Integer> getWritableKeycodes() {
+		initKeyMap();
+		return lowerCase.keySet();
+	}
+	
+	public static char getLowerCase(int keyCode) {
+		initKeyMap();
+		return lowerCase.get(keyCode);
+	}
+	
+	public static char getUpperCase(int keyCode) {
+		initKeyMap();
+		return upperCase.get(keyCode);
 	}
 }
