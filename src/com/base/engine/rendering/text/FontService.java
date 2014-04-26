@@ -8,11 +8,11 @@ public class FontService {
 	
 	private static HashMap<String, Font> fonts = new HashMap<String, Font>();
 	
-	public static Font getFont(String name, int size) throws FontFormatException, IOException {
-		String key = name + "__" + size;
+	public static Font getFont(String name, int style, int size) throws FontFormatException, IOException {
+		String key = name + "__" + style + "__" + size;
 		if (fonts.containsKey(key))
 			return fonts.get(key);
-		fonts.put(key, new Font(name, size));
+		fonts.put(key, new Font(name, style, size));
 		return fonts.get(key);
 	}
 

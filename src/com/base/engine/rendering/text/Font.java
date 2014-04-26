@@ -18,22 +18,23 @@ import com.base.engine.rendering.Window;
 
 public class Font {
 	
-	private static final String RES = "/res/fonts";
+	private static final String RES = "./res/fonts";
 	
 	private TrueTypeFont font;
 	private int id;
 	private int size;
 
-	public Font(String name, int size) throws FontFormatException, IOException {
+	public Font(String name, int style, int size) throws FontFormatException, IOException {
 		this.size = size;
 		if (Files.exists(FileSystems.getDefault().getPath(RES + "/" + name))) {
-			InputStream inputStream	= ResourceLoader.getResourceAsStream("brinathyn.ttf");
-			 
+			System.out.println("found");
+			InputStream inputStream	= ResourceLoader.getResourceAsStream(RES + "/" + name);
 			java.awt.Font awtFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, inputStream);
-			awtFont = awtFont.deriveFont(24f); // set font size
+			awtFont = awtFont.deriveFont((float)size);
+			awtFont = awtFont.deriveFont(style);
 			font = new TrueTypeFont(awtFont, false);
 		} else {
-			java.awt.Font awtFont = new java.awt.Font("Times New Roman", java.awt.Font.BOLD, size);
+			java.awt.Font awtFont = new java.awt.Font(name, style, size);
 			font = new TrueTypeFont(awtFont, false);
 		}
 		id = glGetInteger(GL_TEXTURE_BINDING_2D);
