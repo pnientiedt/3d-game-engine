@@ -1,16 +1,15 @@
 package com.base.engine.rendering;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 
-import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
@@ -20,6 +19,7 @@ import com.base.engine.core.Vector3f;
 import com.base.engine.objects.GameObject;
 import com.base.engine.physics.Transform;
 import com.base.engine.rendering.resourceManagement.MappedValues;
+import com.base.engine.rendering.text.FontService;
 
 public class RenderingEngine extends MappedValues {
 	
@@ -33,13 +33,6 @@ public class RenderingEngine extends MappedValues {
 	private Camera3D camera3D;
 	private Camera2D camera2D;
 	private boolean perspective;
-	
-	private TrueTypeFont font;
-	private TrueTypeFont font2;
-	private boolean antiAlias = true;
-	
-	private Font awtFont;
-	private int id;
 	
 	public RenderingEngine() {
 		super();
@@ -75,10 +68,6 @@ public class RenderingEngine extends MappedValues {
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, Window.getWidth(), Window.getHeight(), 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		
-		awtFont = new Font("Times New Roman", Font.BOLD, 24);
-		font = new TrueTypeFont(awtFont, antiAlias);
-		id = glGetInteger(GL_TEXTURE_BINDING_2D);
 	}
 	
 	public void updateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType) {
@@ -110,19 +99,16 @@ public class RenderingEngine extends MappedValues {
 		
 		ui.renderAll(forwardUI, this);
 		
-		glUseProgram(0);
-		glDisable(GL_CULL_FACE);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, id);
-		Color.white.bind();
-		font.drawString(100, 50, "THE LIGHTWEIGHT JAVA GAMES LIBRARY", Color.yellow);
-		glEnable(GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_BLEND);
+		try {
+			FontService.getFont("brinathyn.ttf", 50).render(50,50,"Hallo Welt!", Color.red);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		perspective = true;
 		/*** 2D END***/
 		
