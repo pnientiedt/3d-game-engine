@@ -3,14 +3,10 @@ package com.base.engine.rendering;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 
-import java.awt.FontFormatException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
-
 import com.base.engine.components.BaseLight;
 import com.base.engine.components.Camera;
 import com.base.engine.components.Camera3D;
@@ -19,7 +15,6 @@ import com.base.engine.core.Vector3f;
 import com.base.engine.objects.GameObject;
 import com.base.engine.physics.Transform;
 import com.base.engine.rendering.resourceManagement.MappedValues;
-import com.base.engine.rendering.text.FontService;
 
 public class RenderingEngine extends MappedValues {
 	

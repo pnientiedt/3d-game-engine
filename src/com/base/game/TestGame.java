@@ -3,8 +3,6 @@ package com.base.game;
 import java.awt.FontFormatException;
 import java.io.IOException;
 
-import org.newdawn.slick.Color;
-
 import com.base.engine.components.*;
 import com.base.engine.components.ui.InputField;
 import com.base.engine.core.*;

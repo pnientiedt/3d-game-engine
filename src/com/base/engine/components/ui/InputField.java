@@ -1,7 +1,5 @@
 package com.base.engine.components.ui;
 
-import java.util.ArrayList;
-
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 
@@ -51,6 +49,7 @@ public class InputField extends GameComponent {
 		}
 	}
 
+	@Override
 	public void update(float delta) {
 
 	}
