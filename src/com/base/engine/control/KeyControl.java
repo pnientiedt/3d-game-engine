@@ -19,7 +19,7 @@ public class KeyControl extends Control {
 	@Override
 	public boolean isActive() {
 		for (Integer key: keys) {
-			if (Input.getKey(key)) {
+			if (Input.getKey(key) && !Input.isKeyConsumed(key)) {
 				return true;
 			}
 		}

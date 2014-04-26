@@ -1,5 +1,6 @@
-package com.base.engine.components;
+package com.base.engine.components.control;
 
+import com.base.engine.components.GameComponent;
 import com.base.engine.core.Input;
 import com.base.engine.core.Matrix4f;
 import com.base.engine.core.Quaternion;

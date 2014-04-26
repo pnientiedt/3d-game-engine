@@ -1,7 +1,8 @@
-package com.base.engine.components;
+package com.base.engine.components.control;
 
 import org.lwjgl.input.Mouse;
 
+import com.base.engine.components.GameComponent;
 import com.base.engine.core.Vector3f;
 
 public class Zoom extends GameComponent {

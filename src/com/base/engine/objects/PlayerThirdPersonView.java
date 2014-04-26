@@ -1,12 +1,12 @@
 package com.base.engine.objects;
 
-import com.base.engine.components.AxisMove;
-import com.base.engine.components.AxisRotate;
 import com.base.engine.components.Camera3D;
-import com.base.engine.components.Jump;
-import com.base.engine.components.ResetCameraToPlayer;
-import com.base.engine.components.ResetPlayerToCamera;
-import com.base.engine.components.Zoom;
+import com.base.engine.components.control.AxisMove;
+import com.base.engine.components.control.AxisRotate;
+import com.base.engine.components.control.Jump;
+import com.base.engine.components.control.ResetCameraToPlayer;
+import com.base.engine.components.control.ResetPlayerToCamera;
+import com.base.engine.components.control.Zoom;
 import com.base.engine.control.ControlForward;
 import com.base.engine.control.ControlLeftMouse;
 import com.base.engine.control.ControlMoveLeftRight;

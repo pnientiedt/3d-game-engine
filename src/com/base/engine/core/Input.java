@@ -1,5 +1,7 @@
 package com.base.engine.core;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -158,10 +160,16 @@ public class Input {
 	private static boolean[] lastKeys = new boolean[NUM_KEYCODES];
 	private static boolean[] lastMouse = new boolean[NUM_MOUSEBUTTONS];
 	
+	private static ArrayList<Integer> consumedKeys = new ArrayList<Integer>();
+	private static ArrayList<Integer> consumedMouse = new ArrayList<Integer>();
+	
 	private static MouseState mouseState = MouseState.CURSOR;
 	private static Vector2f initialMousePosition;
 
 	public static void update() {
+		consumedKeys.clear();
+		consumedMouse.clear();
+		
 		for (int i = 0; i < NUM_KEYCODES; i++)
 			lastKeys[i] = getKey(i);
 
@@ -183,6 +191,14 @@ public class Input {
 	public static boolean getKeyUp(int keyCode) {
 		return !getKey(keyCode) && lastKeys[keyCode];
 	}
+	
+	public static void setKeyConsumed(int keyCode) {
+		consumedKeys.add(keyCode);
+	}
+	
+	public static boolean isKeyConsumed(int keyCode) {
+		return consumedKeys.contains(keyCode);
+	}
 
 	public static boolean getMouse(int mouseButton) {
 		return Mouse.isButtonDown(mouseButton);
@@ -194,6 +210,14 @@ public class Input {
 
 	public static boolean getMouseUp(int mouseButton) {
 		return !getMouse(mouseButton) && lastMouse[mouseButton];
+	}
+	
+	public static void setMouseConsumed(int mouseButton) {
+		consumedMouse.add(mouseButton);
+	}
+	
+	public static boolean isMouseConsumed(int mouseButton) {
+		return consumedMouse.contains(mouseButton);
 	}
 
 	public static Vector2f getMousePosition() {
