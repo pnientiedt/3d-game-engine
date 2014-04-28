@@ -4,10 +4,11 @@ import java.awt.FontFormatException;
 import java.io.IOException;
 
 import com.base.engine.components.*;
-import com.base.engine.components.ui.InputField;
+import com.base.engine.components.ui.TextInput;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
 import com.base.engine.objects.PlayerThirdPersonView;
+import com.base.engine.objects.ui.InputField;
 import com.base.engine.rendering.*;
 import com.base.engine.rendering.text.FontService;
 
@@ -142,16 +143,25 @@ public class TestGame extends Game
 		addToUI(new GameObject().addComponent(new Camera2D()));
 		
 		//INPUT
-		InputField inputField = new InputField();
+//		TextInput inputField = new TextInput();
+//		try {
+//			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
+//		} catch (FontFormatException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		GameObject inputFieldObject = new GameObject().addComponent(inputField);
+//		inputFieldObject.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
+//		
+//		addToUI(inputFieldObject);
+		
 		try {
+			InputField inputField = new InputField();
 			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
+			inputField.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
+			addToUI(inputField);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		GameObject inputFieldObject = new GameObject().addComponent(inputField);
-		inputFieldObject.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
-		
-		addToUI(inputFieldObject);
 	}
 }

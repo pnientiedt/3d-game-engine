@@ -10,7 +10,7 @@ import com.base.engine.rendering.Shader;
 import com.base.engine.rendering.text.Font;
 import com.base.engine.rendering.text.FontService;
 
-public class InputField extends GameComponent {
+public class TextInput extends GameComponent {
 
 	private final static float PRESSEDINTERVAL = 0.1f;
 
@@ -21,7 +21,9 @@ public class InputField extends GameComponent {
 	private float passedTime = 0;
 	int[] pressedKeys = new int[Keyboard.getKeyCount()];
 
-	public InputField() {
+	public TextInput(Font font, Color color) {
+		this.font = font;
+		this.color = color;
 	}
 
 	@Override
@@ -30,18 +32,18 @@ public class InputField extends GameComponent {
 			return;
 
 		passedTime += delta;
-//		for (int key : Input.getWritableKeycodes()) {
-			 for (int key = 0; key < Keyboard.getKeyCount(); key++) {
+		for (int key : Input.getWritableKeycodes()) {
+			// for (int key = 0; key < Keyboard.getKeyCount(); key++) {
 			Input.setKeyConsumed(key);
 			if (Input.getKey(key) && passedTime > PRESSEDINTERVAL)
 				pressedKeys[key] = pressedKeys[key] + 1;
 			
 			if (Input.getKeyDown(key) || Input.getKey(key) && passedTime > PRESSEDINTERVAL && pressedKeys[key] > 40) {
-//				if (Input.getKey(Input.KEY_LSHIFT) || Input.getKey(Input.KEY_RSHIFT))
-//					text += Input.getUpperCase(key);
-//				else
-//					text += Input.getLowerCase(key);
-				 System.out.println(key + " : " + Keyboard.getKeyName(key));
+				if (Input.getKey(Input.KEY_LSHIFT) || Input.getKey(Input.KEY_RSHIFT))
+					text += Input.getUpperCase(key);
+				else
+					text += Input.getLowerCase(key);
+				// System.out.println(key + " : " + Keyboard.getKeyName(key));
 				if (passedTime > PRESSEDINTERVAL)
 					passedTime = 0;
 			} else if (!Input.getKey(key))
@@ -57,11 +59,7 @@ public class InputField extends GameComponent {
 	@Override
 	public void render(Shader shader, RenderingEngine renderingEngine) {
 		try {
-			if (font == null)
-				font = FontService.getFont();
-			if (color == null)
-				color = Color.white;
-			font.render(getTransform().getPos().getX(), getTransform().getPos().getY(), text, color);
+			font.render(getTransform().getTransformedPos().getX(), getTransform().getTransformedPos().getY(), text, color);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -70,8 +68,16 @@ public class InputField extends GameComponent {
 	public void setFont(Font font) {
 		this.font = font;
 	}
+	
+	public Font getFont() {
+		return font;
+	}
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	public Color getcolor() {
+		return color;
 	}
 }

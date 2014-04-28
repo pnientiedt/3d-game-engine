@@ -55,5 +55,9 @@ public class Font {
 		glEnable(GL11.GL_LIGHTING);
 		glDisable(GL11.GL_BLEND);
 	}
+	
+	public int getSize() {
+		return size;
+	}
 
 }
