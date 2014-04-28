@@ -280,6 +280,22 @@ public class Input {
 		addToMap(2, '1', '!');
 		addToMap(3, '2', '"');
 		addToMap(4, '3', '§');
+		addToMap(5, '4', '$');
+		addToMap(6, '5', '%');
+		addToMap(7, '6', '&');
+		addToMap(8, '7', '/');
+		addToMap(9, '8', '(');
+		addToMap(10, '9', ')');
+		addToMap(11, '0', '=');
+		addToMap(26, 'ß', '?');
+		addToMap(27, '´', '`');
+		addToMap(6, '5', '%');
+		addToMap(6, '5', '%');
+		addToMap(6, '5', '%');
+		addToMap(6, '5', '%');
+		addToMap(6, '5', '%');
+		addToMap(6, '5', '%');
+		
 	}
 	
 	private static void addToMap(int keyCode, char lower, char upper) {

@@ -30,18 +30,18 @@ public class InputField extends GameComponent {
 			return;
 
 		passedTime += delta;
-		for (int key : Input.getWritableKeycodes()) {
-			// for (int key = 0; key < Keyboard.getKeyCount(); key++) {
+//		for (int key : Input.getWritableKeycodes()) {
+			 for (int key = 0; key < Keyboard.getKeyCount(); key++) {
 			Input.setKeyConsumed(key);
 			if (Input.getKey(key) && passedTime > PRESSEDINTERVAL)
 				pressedKeys[key] = pressedKeys[key] + 1;
 			
 			if (Input.getKeyDown(key) || Input.getKey(key) && passedTime > PRESSEDINTERVAL && pressedKeys[key] > 40) {
-				if (Input.getKey(Input.KEY_LSHIFT) || Input.getKey(Input.KEY_RSHIFT))
-					text += Input.getUpperCase(key);
-				else
-					text += Input.getLowerCase(key);
-				// System.out.println(key + " : " + Keyboard.getKeyName(key));
+//				if (Input.getKey(Input.KEY_LSHIFT) || Input.getKey(Input.KEY_RSHIFT))
+//					text += Input.getUpperCase(key);
+//				else
+//					text += Input.getLowerCase(key);
+				 System.out.println(key + " : " + Keyboard.getKeyName(key));
 				if (passedTime > PRESSEDINTERVAL)
 					passedTime = 0;
 			} else if (!Input.getKey(key))
