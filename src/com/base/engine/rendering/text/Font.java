@@ -59,5 +59,9 @@ public class Font {
 	public int getSize() {
 		return size;
 	}
+	
+	public int getWidth(String text) {
+		return font.getWidth(text);
+	}
 
 }

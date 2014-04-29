@@ -3,6 +3,8 @@ package com.base.game;
 import java.awt.FontFormatException;
 import java.io.IOException;
 
+import org.newdawn.slick.Color;
+
 import com.base.engine.components.*;
 import com.base.engine.components.ui.TextInput;
 import com.base.engine.core.*;
@@ -157,8 +159,10 @@ public class TestGame extends Game
 		
 		try {
 			InputField inputField = new InputField();
-			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
-			inputField.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
+//			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
+			inputField.setFont(FontService.getFont("Times New Roman", java.awt.Font.PLAIN, 55));
+//			inputField.setColor(Color.cyan);
+			inputField.getTransform().setPos(new Vector3f(100, Window.getHeight()/3, 0));
 			addToUI(inputField);
 		} catch (Exception e) {
 			e.printStackTrace();

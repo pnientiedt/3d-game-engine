@@ -24,16 +24,14 @@ public class InputField extends GameObject {
 	private int space;
 	private int border;
 	
-	Material backgroundMaterial;
-	Material borderMaterial;
-	Mesh backgroundMesh;
-	Mesh topMesh;
-	Mesh bottomMesh;
-	Mesh leftMesh;
-	Mesh rightMesh;
+	MeshRenderer background;
+	MeshRenderer topBorder;
+	MeshRenderer bottomBorder;
+	MeshRenderer leftBorder;
+	MeshRenderer rightBorder;
 	
 	public InputField() throws FontFormatException, IOException {
-		this(FontService.getFont(), Color.white, 200, 10, 10);
+		this(FontService.getFont(), Color.white, 200, 0, 0);
 	}
 	
 	public InputField(Font font, Color color, int length, int space, int border) {
@@ -43,12 +41,12 @@ public class InputField extends GameObject {
 		this.space = space;
 		this.border = border;
 		
-		textInput = new TextInput(font, color);
+		textInput = new TextInput(font, color, length);
 		
 		initializeLayout();
 		
 		GameObject backgroundObject = new GameObject();
-		backgroundObject.addComponent(new MeshRenderer(backgroundMesh, backgroundMaterial));
+		backgroundObject.addComponent(background);
 		
 		GameObject topObject = new GameObject();
 		GameObject bottomObject = new GameObject();
@@ -65,23 +63,34 @@ public class InputField extends GameObject {
 	}
 	
 	private void initializeLayout() {
-		backgroundMaterial = new Material();
+		Material backgroundMaterial = new Material();
 		backgroundMaterial.addTexture("diffuse", new Texture("bricks.jpg"));
 		backgroundMaterial.addFloat("specularIntensity", 1f);
 		backgroundMaterial.addFloat("specularPower", 8f);
 		
-		borderMaterial = new Material();
+		Material borderMaterial = new Material();
 		borderMaterial.addTexture("diffuse", new Texture("test.png"));
 		borderMaterial.addFloat("specularIntensity", 1f);
 		borderMaterial.addFloat("specularPower", 8f);
 		
 		//Background
-		backgroundMesh = MeshUtilities.getRectangle(textInput.getFont().getSize() + space * 2, length * space * 2, 0);
-		
+		Mesh backgroundMesh = MeshUtilities.getRectangle(textInput.getFont().getSize() + space * 2, length + space * 2, 0);
+		background = updateMeshRenderer(background, backgroundMesh, backgroundMaterial);
+	}
+	
+	private MeshRenderer updateMeshRenderer(MeshRenderer meshRenderer, Mesh mesh, Material material) {
+		if (meshRenderer == null) {
+			meshRenderer = new MeshRenderer(mesh, material);
+		} else {
+			meshRenderer.setMesh(mesh);
+			meshRenderer.setMaterial(material);
+		}
+		return meshRenderer;	
 	}
 	
 	public void setFont(Font font) {
 		textInput.setFont(font);
+		initializeLayout();
 	}
 
 	public void setColor(Color color) {
