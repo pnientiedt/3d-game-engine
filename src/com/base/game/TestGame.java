@@ -53,22 +53,22 @@ public class TestGame extends Game
 				
 		MeshRenderer meshRenderer = new MeshRenderer(mesh, material);
 
-		GameObject planeObject = new GameObject();
+		GameObject planeObject = new GameObject("PlaneObject");
 		planeObject.addComponent(meshRenderer);
 		planeObject.getTransform().getPos().set(0, -1, 5);
 
-		GameObject directionalLightObject = new GameObject();
+		GameObject directionalLightObject = new GameObject("DirectionalLight");
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0,0,1), 0.4f);
 
 		directionalLightObject.addComponent(directionalLight);
 
-		GameObject pointLightObject = new GameObject();
+		GameObject pointLightObject = new GameObject("PointLight");
 		pointLightObject.addComponent(new PointLight(new Vector3f(0,1,0), 0.4f, new Attenuation(0,0,1)));
 
 		SpotLight spotLight = new SpotLight(new Vector3f(0,1,1), 0.4f,
 				new Attenuation(0,0,0.1f), 0.7f);
 
-		GameObject spotLightObject = new GameObject();
+		GameObject spotLightObject = new GameObject("SpotLight");
 		spotLightObject.addComponent(spotLight);
 
 		spotLightObject.getTransform().getPos().set(5, 0, 5);
@@ -81,9 +81,9 @@ public class TestGame extends Game
 
 		//getRootObject().addChild(new GameObject().addComponent(new Camera((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(), 0.01f, 1000.0f)));
 
-		GameObject testMesh1 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
-		GameObject testMesh2 = new GameObject().addComponent(new MeshRenderer(mesh2, material));
-		GameObject testMesh3 = new GameObject().addComponent(new LookAtComponent()).addComponent(new MeshRenderer(tempMesh, material));
+		GameObject testMesh1 = new GameObject("TestMesh1").addComponent(new MeshRenderer(mesh2, material));
+		GameObject testMesh2 = new GameObject("TestMesh2").addComponent(new MeshRenderer(mesh2, material));
+		GameObject testMesh3 = new GameObject("TestMesh3").addComponent(new LookAtComponent()).addComponent(new MeshRenderer(tempMesh, material));
 
 		testMesh1.getTransform().getPos().set(0, 2, 0);
 		testMesh1.getTransform().setRot(new Quaternion(new Vector3f(0,1,0), 0.4f));
@@ -101,7 +101,7 @@ public class TestGame extends Game
 		testMesh3.getTransform().getPos().set(5,5,5);
 		testMesh3.getTransform().setRot(new Quaternion(new Vector3f(0,1,0), (float)Math.toRadians(-70.0f)));
 		
-		addObject(new GameObject().addComponent(new MeshRenderer(new Mesh("monkey3.obj"), material2)));
+		addObject(new GameObject("MonkeyObject").addComponent(new MeshRenderer(new Mesh("monkey3.obj"), material2)));
 
 		directionalLight.getTransform().setRot(new Quaternion(new Vector3f(1,0,0), (float)Math.toRadians(-45)));
 		
@@ -115,56 +115,56 @@ public class TestGame extends Game
 		
 		//UI
 		
-		Material material3 = new Material();//)new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
-		material3.addTexture("diffuse", new Texture("test.png"));//material.addTexture("diffuse", new Texture("test.png"));
-		material3.addFloat("specularIntensity", 1f);
-		material3.addFloat("specularPower", 8f);
-		
-		Vertex[] vertices3 = new Vertex[] { 	new Vertex( new Vector3f(0, 0, 0), new Vector2f(0.0f, 0.0f)),
-				new Vertex( new Vector3f(0, 100, 0), new Vector2f(0.0f, 1.0f)),
-				new Vertex( new Vector3f(100, 0 ,0), new Vector2f(1.0f, 0.0f)),
-				new Vertex( new Vector3f(100, 100, 0), new Vector2f(1.0f, 1.0f))};
-
-		int indices3[] = { 0, 1, 2,
-				2, 1, 3};
-		
-		Mesh ui = new Mesh(vertices3, indices3, true);
-		
-		MeshRenderer uiRenderer = new MeshRenderer(ui, material3);
-		GameObject uiObject = new GameObject();
-		uiObject.getTransform().setPos(new Vector3f(0, 0, 0));
-		
-		MeshRenderer uiRenderer2 = new MeshRenderer(ui, material2);
-		GameObject uiObject2 = new GameObject();
-		uiObject2.getTransform().setPos(new Vector3f(50, 50, 0));
-		
-		addToUI(uiObject2.addComponent(uiRenderer2));
-		addToUI(uiObject.addComponent(uiRenderer));
-		
-		addToUI(new GameObject().addComponent(new Camera2D()));
-		
-		//INPUT
-//		TextInput inputField = new TextInput();
+//		Material material3 = new Material();//)new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
+//		material3.addTexture("diffuse", new Texture("test.png"));//material.addTexture("diffuse", new Texture("test.png"));
+//		material3.addFloat("specularIntensity", 1f);
+//		material3.addFloat("specularPower", 8f);
+//		
+//		Vertex[] vertices3 = new Vertex[] { 	new Vertex( new Vector3f(0, 0, 0), new Vector2f(0.0f, 0.0f)),
+//				new Vertex( new Vector3f(0, 100, 0), new Vector2f(0.0f, 1.0f)),
+//				new Vertex( new Vector3f(100, 0 ,0), new Vector2f(1.0f, 0.0f)),
+//				new Vertex( new Vector3f(100, 100, 0), new Vector2f(1.0f, 1.0f))};
+//
+//		int indices3[] = { 0, 1, 2,
+//				2, 1, 3};
+//		
+//		Mesh ui = new Mesh(vertices3, indices3, true);
+//		
+//		MeshRenderer uiRenderer = new MeshRenderer(ui, material3);
+//		GameObject uiObject = new GameObject("UIObject");
+//		uiObject.getTransform().setPos(new Vector3f(0, 0, 0));
+//		
+//		MeshRenderer uiRenderer2 = new MeshRenderer(ui, material2);
+//		GameObject uiObject2 = new GameObject("UIObject2");
+//		uiObject2.getTransform().setPos(new Vector3f(50, 50, 0));
+//		
+//		addToUI(uiObject2.addComponent(uiRenderer2));
+//		addToUI(uiObject.addComponent(uiRenderer));
+//		
+//		addToUI(new GameObject("Camera2D").addComponent(new Camera2D()));
+//		
+//		//INPUT
+////		TextInput inputField = new TextInput();
+////		try {
+////			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
+////		} catch (FontFormatException | IOException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+////		GameObject inputFieldObject = new GameObject().addComponent(inputField);
+////		inputFieldObject.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
+////		
+////		addToUI(inputFieldObject);
+//		
 //		try {
-//			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
-//		} catch (FontFormatException | IOException e) {
-//			// TODO Auto-generated catch block
+//			InputField inputField = new InputField();
+////			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
+//			inputField.setFont(FontService.getFont("Times New Roman", java.awt.Font.PLAIN, 55));
+////			inputField.setColor(Color.cyan);
+//			inputField.getTransform().setPos(new Vector3f(100, Window.getHeight()/3, 0));
+//			addToUI(inputField);
+//		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-//		GameObject inputFieldObject = new GameObject().addComponent(inputField);
-//		inputFieldObject.getTransform().setPos(new Vector3f(100, Window.getHeight()/2, 0));
-//		
-//		addToUI(inputFieldObject);
-		
-		try {
-			InputField inputField = new InputField();
-//			inputField.setFont(FontService.getFont("brinathyn.ttf", java.awt.Font.PLAIN, 44));
-			inputField.setFont(FontService.getFont("Times New Roman", java.awt.Font.PLAIN, 55));
-//			inputField.setColor(Color.cyan);
-			inputField.getTransform().setPos(new Vector3f(100, Window.getHeight()/3, 0));
-			addToUI(inputField);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

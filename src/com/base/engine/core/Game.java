@@ -22,6 +22,8 @@ public abstract class Game
 	}
 	
 	public void render(RenderingEngine renderingEngine) {
+//		System.out.println();
+//		System.out.println("New Scene Graph render:");
 		renderingEngine.render(getRootObject(), getUI());
 	}
 	
@@ -31,18 +33,18 @@ public abstract class Game
 	
 	private GameObject getRootObject() {
 		if (root == null) {
-			root = new GameObject();
+			root = new GameObject("ROOT");
 		}
 		return root;
 	}
 	
 	public void addToUI(GameObject object) {
-		getUI().addChildHighPriority(object);
+		getUI().addChild(object);
 	}
 	
 	private GameObject getUI() {
 		if (ui == null) {
-			ui = new GameObject();
+			ui = new GameObject("UI");
 		}
 		return ui;
 	}

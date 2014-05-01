@@ -91,9 +91,9 @@ public class RenderingEngine extends MappedValues {
 		
 		/*** 2D ***/
 		perspective = false;
-		
+		glDisable(GL_DEPTH_TEST);
 		ui.renderAll(forwardUI, this);
-
+		glEnable(GL_DEPTH_TEST);
 		perspective = true;
 		/*** 2D END***/
 		

@@ -43,15 +43,14 @@ public class Font {
 	public void render(float x, float y, String text, Color color) {
 		glUseProgram(0);
 		glDisable(GL_CULL_FACE);
-		glDisable(GL11.GL_DEPTH_TEST);
 		glDisable(GL11.GL_LIGHTING);
 		glEnable(GL11.GL_BLEND);
         glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		glBindTexture(GL11.GL_TEXTURE_2D, id);
 		Color.white.bind();
 		font.drawString(x, Window.getHeight() - y - size, text, color);
+//		System.out.println(x + " " + (Window.getHeight() - y - size) + ": " + text);
 		glEnable(GL_CULL_FACE);
-		glEnable(GL11.GL_DEPTH_TEST);
 		glEnable(GL11.GL_LIGHTING);
 		glDisable(GL11.GL_BLEND);
 	}

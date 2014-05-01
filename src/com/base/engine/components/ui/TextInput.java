@@ -44,7 +44,6 @@ public class TextInput extends GameComponent {
 		
 		if (!active)
 			return;
-
 		passedTime += delta;
 		if (!handleKey(Input.KEY_BACK)) {
 			for (int key : Input.getWritableKeycodes()) {

@@ -27,8 +27,7 @@ public class PlayerThirdPersonView extends GameObject {
 	}
 
 	public PlayerThirdPersonView(Camera3D camera3D, float cameraInitialY, float cameraInitialZ, float mouseSensitivity, float zoomSensitivity) {
-		super();
-		
+		super("PlayerThirdPersonView");
 		//XY Player Movement
 		int speed = 10;
 		int rotationSensitivity = 2;
@@ -45,7 +44,7 @@ public class PlayerThirdPersonView extends GameObject {
 		addComponent(new Jump(15, Input.KEY_SPACE));
 		
 		//Camera
-		GameObject camera = new GameObject();
+		GameObject camera = new GameObject("Camera3D");
 		camera.addComponent(camera3D);
 		//Set position
 		camera.getTransform().setPos(camera.getTransform().getPos().add(new Vector3f(0,cameraInitialY,cameraInitialZ)));

@@ -13,6 +13,8 @@ import com.base.engine.rendering.Shader;
 public class GameObject implements Comparable<GameObject> {
 	private static final int RECALIBRATION_VALUE = Integer.MAX_VALUE - 100;
 
+	protected String name;
+
 	private ArrayList<GameObject> children;
 	private ArrayList<GameComponent> components;
 	private GameObject parent;
@@ -23,7 +25,8 @@ public class GameObject implements Comparable<GameObject> {
 	private Integer priority = 0;
 	private boolean recalibratePriority = false;
 
-	public GameObject() {
+	public GameObject(String name) {
+		this.name = name;
 		children = new ArrayList<GameObject>();
 		components = new ArrayList<GameComponent>();
 		transform = new Transform();
@@ -84,7 +87,8 @@ public class GameObject implements Comparable<GameObject> {
 		return parent;
 	}
 
-	public void addChild(GameObject child) {
+	private void addChild(GameObject child, int priority) {
+		child.setPriority(priority);
 		children.add(child);
 		child.setParent(this);
 		child.setEngine(engine);
@@ -93,21 +97,22 @@ public class GameObject implements Comparable<GameObject> {
 
 	public void addChildLowPriority(GameObject o) {
 		for (GameObject child : children) {
-			child.decreasePriority();
+			child.increasePriority();
 		}
-		addChild(o);
+		addChild(o, 0);
 		sortChildren();
 	}
 
-	public void addChildHighPriority(GameObject o) {
+	public void addChild(GameObject o) {
 		int prio = 0;
-		for (GameObject child : children) {
-			if (child.getPriority() > prio)
-				prio = child.getPriority();
+		if (children.size() > 0) {
+			for (GameObject child : children) {
+				if (child.getPriority() > prio)
+					prio = child.getPriority();
+			}
+			prio++;
 		}
-		prio++;
-		o.setPriority(prio);
-		addChild(o);
+		addChild(o, prio);
 		sortChildren();
 	}
 
@@ -151,6 +156,7 @@ public class GameObject implements Comparable<GameObject> {
 	}
 
 	public void render(Shader shader, RenderingEngine renderingEngine) {
+//		System.out.println("render object with prio " + priority + ": " + name);
 		for (GameComponent component : components)
 			component.render(shader, renderingEngine);
 	}
@@ -173,9 +179,9 @@ public class GameObject implements Comparable<GameObject> {
 		return priority;
 	}
 
-	public void decreasePriority() {
+	public void increasePriority() {
 		priority++;
-		
+
 		if (priority > RECALIBRATION_VALUE) {
 			parent.requestRecalibration();
 		}
@@ -183,12 +189,12 @@ public class GameObject implements Comparable<GameObject> {
 
 	@Override
 	public int compareTo(GameObject o) {
-		return o.getPriority().compareTo(priority);
+		return priority.compareTo(o.getPriority());
 	}
 
 	public void sortChildren() {
 		Collections.sort(children);
-		
+
 		if (recalibratePriority) {
 			for (int i = 0; i < children.size(); i++) {
 				children.get(i).setPriority(i);
@@ -213,28 +219,35 @@ public class GameObject implements Comparable<GameObject> {
 	 */
 	public void setToHighestPriority(GameObject caller) {
 		if (isRootObject()) {
+			int prio = 0;
 			for (GameObject child : children) {
-				child.decreasePriority();
+				if (child.getPriority() > prio)
+					prio = child.getPriority();
 			}
-			caller.setPriority(0);
+			prio++;
+			caller.setPriority(prio);
 			sortChildren();
 		}
 	}
-	
+
 	public void requestRecalibration() {
 		recalibratePriority = true;
 	}
-	
+
 	public void reset() {
 		children.clear();
 		components.clear();
 	}
-	
+
 	public void removeChild(GameObject o) {
 		children.remove(o);
 	}
-	
+
 	public void removeComponent(GameComponent c) {
 		components.remove(c);
+	}
+
+	public String getName() {
+		return name;
 	}
 }
