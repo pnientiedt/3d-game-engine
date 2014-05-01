@@ -1,15 +1,13 @@
-package com.base.engine.objects.ui;
+package com.base.engine.ui;
 
 import org.newdawn.slick.Color;
 
 import com.base.engine.components.MeshRenderer;
-import com.base.engine.components.ui.TextInput;
 import com.base.engine.objects.GameObject;
 import com.base.engine.rendering.Material;
 import com.base.engine.rendering.Mesh;
 import com.base.engine.rendering.MeshUtilities;
 import com.base.engine.rendering.Texture;
-import com.base.engine.rendering.text.Font;
 
 public class InputField extends GameObject {
 	

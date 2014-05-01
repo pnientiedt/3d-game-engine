@@ -1,4 +1,4 @@
-package com.base.engine.rendering.text;
+package com.base.engine.ui;
 
 import java.awt.FontFormatException;
 import java.io.IOException;

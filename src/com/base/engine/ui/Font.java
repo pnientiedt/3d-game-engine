@@ -1,4 +1,4 @@
-package com.base.engine.rendering.text;
+package com.base.engine.ui;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;

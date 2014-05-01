@@ -1,4 +1,4 @@
-package com.base.engine.components.ui;
+package com.base.engine.ui;
 
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
@@ -8,7 +8,6 @@ import com.base.engine.core.Input;
 import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.RenderingEngine;
 import com.base.engine.rendering.Shader;
-import com.base.engine.rendering.text.Font;
 
 public class TextInput extends GameComponent {
 
