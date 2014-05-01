@@ -11,7 +11,7 @@ import com.base.engine.rendering.Shader;
 
 public class TextInput extends GameComponent {
 
-	private final static float PRESSEDINTERVAL = 0.1f;
+	private final static float PRESSEDINTERVAL = 0.05f;
 
 	private boolean active;
 	private int length;
