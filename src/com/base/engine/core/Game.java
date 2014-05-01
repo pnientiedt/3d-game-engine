@@ -51,4 +51,12 @@ public abstract class Game
 		getRootObject().setEngine(engine);
 		getUI().setEngine(engine);
 	}
+	
+	public void resetGameObjects() {
+		getRootObject().reset();
+	}
+	
+	public void resetUI() {
+		getUI().reset();
+	}
 }

@@ -107,7 +107,6 @@ public class GameObject implements Comparable<GameObject> {
 		}
 		prio++;
 		o.setPriority(prio);
-		System.out.println("Add object with prio " + o.getPriority());
 		addChild(o);
 		sortChildren();
 	}
@@ -224,5 +223,10 @@ public class GameObject implements Comparable<GameObject> {
 	
 	public void requestRecalibration() {
 		recalibratePriority = true;
+	}
+	
+	public void reset() {
+		children.clear();
+		components.clear();
 	}
 }
