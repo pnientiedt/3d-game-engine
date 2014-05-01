@@ -37,7 +37,7 @@ public abstract class Game
 	}
 	
 	public void addToUI(GameObject object) {
-		getUI().addChild(object);
+		getUI().addChildHighPriority(object);
 	}
 	
 	private GameObject getUI() {

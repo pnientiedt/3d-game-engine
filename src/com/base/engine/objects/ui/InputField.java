@@ -2,9 +2,6 @@ package com.base.engine.objects.ui;
 
 import java.awt.FontFormatException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.newdawn.slick.Color;
 
 import com.base.engine.components.MeshRenderer;

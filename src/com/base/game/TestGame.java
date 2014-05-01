@@ -1,12 +1,6 @@
 package com.base.game;
 
-import java.awt.FontFormatException;
-import java.io.IOException;
-
-import org.newdawn.slick.Color;
-
 import com.base.engine.components.*;
-import com.base.engine.components.ui.TextInput;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
 import com.base.engine.objects.PlayerThirdPersonView;
@@ -138,8 +132,13 @@ public class TestGame extends Game
 		
 		MeshRenderer uiRenderer = new MeshRenderer(ui, material3);
 		GameObject uiObject = new GameObject();
-//		uiObject.getTransform().setPos(new Vector3f(0, 0, 0));
+		uiObject.getTransform().setPos(new Vector3f(0, 0, 0));
 		
+		MeshRenderer uiRenderer2 = new MeshRenderer(ui, material2);
+		GameObject uiObject2 = new GameObject();
+		uiObject2.getTransform().setPos(new Vector3f(50, 50, 0));
+		
+		addToUI(uiObject2.addComponent(uiRenderer2));
 		addToUI(uiObject.addComponent(uiRenderer));
 		
 		addToUI(new GameObject().addComponent(new Camera2D()));
