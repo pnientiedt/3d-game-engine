@@ -23,9 +23,7 @@ public class InputField extends GameObject {
 		
 		textInput = new TextInput(font, color, length, password);
 		
-		GameObject textInputObject = new GameObject(name + "TextInput");
-		textInputObject.addComponent(textInput);
-		addChild(textInputObject);
+		addComponent(textInput);
 	}
 	
 	public void setFont(Font font) {

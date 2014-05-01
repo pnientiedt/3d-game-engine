@@ -27,7 +27,6 @@ public class Font {
 	public Font(String name, int style, int size) throws FontFormatException, IOException {
 		this.size = size;
 		if (Files.exists(FileSystems.getDefault().getPath(RES + "/" + name))) {
-			System.out.println("found");
 			InputStream inputStream	= ResourceLoader.getResourceAsStream(RES + "/" + name);
 			java.awt.Font awtFont = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, inputStream);
 			awtFont = awtFont.deriveFont((float)size);

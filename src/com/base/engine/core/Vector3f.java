@@ -169,6 +169,8 @@ public class Vector3f {
 	}
 	
 	public boolean equals(Vector3f r) {
+		if (r == null)
+			return false;
 		return x == r.getX() && y == r.getY() && z == r.getZ();
 	}
 }
