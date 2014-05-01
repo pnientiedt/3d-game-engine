@@ -4,9 +4,7 @@ import com.base.engine.components.*;
 import com.base.engine.core.*;
 import com.base.engine.objects.GameObject;
 import com.base.engine.objects.PlayerThirdPersonView;
-import com.base.engine.objects.ui.InputField;
 import com.base.engine.rendering.*;
-import com.base.engine.rendering.text.FontService;
 
 public class TestGame extends Game
 {
