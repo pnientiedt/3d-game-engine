@@ -18,12 +18,12 @@ public class InputField extends GameObject {
 	
 	private GameObject testBackground;
 	
-	public InputField(String name, Font font, Color color, int length) {
+	public InputField(String name, Font font, Color color, int length, boolean password) {
 		super(name);
 		
 		this.length = length;
 		
-		textInput = new TextInput(font, color, length);
+		textInput = new TextInput(font, color, length, password);
 		
 		GameObject textInputObject = new GameObject(name + "TextInput");
 		textInputObject.addComponent(textInput);

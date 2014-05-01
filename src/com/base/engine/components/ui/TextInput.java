@@ -21,11 +21,13 @@ public class TextInput extends GameComponent {
 	private Color color;
 	private float passedTime = 0;
 	int[] pressedKeys = new int[Keyboard.getKeyCount()];
+	boolean password;
 
-	public TextInput(Font font, Color color, int length) {
+	public TextInput(Font font, Color color, int length, boolean password) {
 		this.font = font;
 		this.color = color;
 		this.length = length;
+		this.password = password;
 	}
 
 	@Override
@@ -86,6 +88,13 @@ public class TextInput extends GameComponent {
 			String renderText = text;
 			while (font.getWidth(renderText) > length) {
 				renderText = renderText.substring(1);
+			}
+			if (password) {
+				int textLength = renderText.length();
+				renderText = "";
+				for (int i = 0; i < textLength; i++) {
+					renderText += "*";
+				}
 			}
 			font.render(getTransform().getTransformedPos().getX(), getTransform().getTransformedPos().getY(), renderText, color);
 		} catch (Exception e) {
