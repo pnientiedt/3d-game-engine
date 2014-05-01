@@ -113,4 +113,8 @@ public class TextInput extends GameComponent {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public String getText() {
+		return text;
+	}
 }

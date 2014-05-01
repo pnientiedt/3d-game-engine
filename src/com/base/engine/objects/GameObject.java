@@ -229,4 +229,12 @@ public class GameObject implements Comparable<GameObject> {
 		children.clear();
 		components.clear();
 	}
+	
+	public void removeChild(GameObject o) {
+		children.remove(o);
+	}
+	
+	public void removeComponent(GameComponent c) {
+		components.remove(c);
+	}
 }

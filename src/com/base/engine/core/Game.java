@@ -59,4 +59,12 @@ public abstract class Game
 	public void resetUI() {
 		getUI().reset();
 	}
+	
+	public void removeObject(GameObject o) {
+		getRootObject().removeChild(o);
+	}
+	
+	public void removeFromUI(GameObject o) {
+		getUI().removeChild(o);
+	}
 }
